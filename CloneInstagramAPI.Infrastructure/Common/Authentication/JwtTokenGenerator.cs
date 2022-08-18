@@ -7,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace CloneInstagramAPI.Infrastructure.Authentication
+namespace CloneInstagramAPI.Infrastructure.Common.Authentication
 {
     public class JwtTokenGenerator : IJwtTokenGenerator
     {

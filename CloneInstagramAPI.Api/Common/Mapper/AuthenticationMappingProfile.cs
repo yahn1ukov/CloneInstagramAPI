@@ -6,9 +6,9 @@ using CloneInstagramAPI.Contracts.Authentication;
 
 namespace CloneInstagramAPI.Api.Common.Mapping
 {
-    public class AuthenticationMapping : Profile
+    public class AuthenticationMappingProfile : Profile
     {
-        public AuthenticationMapping()
+        public AuthenticationMappingProfile()
         {
             CreateMap<RegistrationRequest, RegistrationCommand>();
             CreateMap<LoginRequest, LoginQuery>();

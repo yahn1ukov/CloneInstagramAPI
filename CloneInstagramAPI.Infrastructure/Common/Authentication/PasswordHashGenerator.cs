@@ -1,7 +1,7 @@
 ﻿using CloneInstagramAPI.Application.Common.Interfaces.Authentication;
 using System.Text;
 
-namespace CloneInstagramAPI.Infrastructure.Authentication
+namespace CloneInstagramAPI.Infrastructure.Common.Authentication
 {
     public class PasswordHashGenerator : IPasswordHashGenerator
     {

@@ -2,7 +2,7 @@
 
 namespace CloneInstagramAPI.Api.Common.Mapping
 {
-    public class UserMapping : Profile
+    public class PostMappingProfile : Profile
     {
     }
 }

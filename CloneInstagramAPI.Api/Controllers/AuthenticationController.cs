@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CloneInstagramAPI.Api.Controllers
 {
-    [Route("/[controller]/[action]")]
+    [Route("api/authentication")]
     public class AuthenticationController : ApiController
     {
         private readonly IMediator _mediator;
@@ -21,21 +21,7 @@ namespace CloneInstagramAPI.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Registration(RegistrationRequest request)
-        {
-            var command = _mapper.Map<RegistrationCommand>(request);
-
-            ErrorOr<AuthenticationResult> registrationResult = await _mediator.Send(command);
-
-            return registrationResult.Match
-            (
-                authenticationResult => Created(nameof(Registration), null),
-                errors => Problem(errors)
-            );
-        }
-
-        [HttpPost]
+        [HttpPost("/login")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
             var command = _mapper.Map<LoginQuery>(request);
@@ -45,6 +31,20 @@ namespace CloneInstagramAPI.Api.Controllers
             return loginResult.Match
             (
                 authenticationResult => Ok(_mapper.Map<LoginResponse>(authenticationResult)),
+                errors => Problem(errors)
+            );
+        }
+
+        [HttpPost("/registration")]
+        public async Task<IActionResult> Registration(RegistrationRequest request)
+        {
+            var command = _mapper.Map<RegistrationCommand>(request);
+
+            ErrorOr<AuthenticationResult> registrationResult = await _mediator.Send(command);
+
+            return registrationResult.Match
+            (
+                authenticationResult => Created(nameof(Registration), null),
                 errors => Problem(errors)
             );
         }

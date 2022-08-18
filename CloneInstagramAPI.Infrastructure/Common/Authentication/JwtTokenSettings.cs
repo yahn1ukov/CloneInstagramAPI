@@ -1,8 +1,7 @@
-﻿namespace CloneInstagramAPI.Infrastructure.Authentication
+﻿namespace CloneInstagramAPI.Infrastructure.Common.Authentication
 {
     public class JwtTokenSettings
     {
-        public static string SectionName = "JwtSettings";
         public string Secret { get; set; } = string.Empty;
         public int ExpiryMinutes { get; set; }
         public string Issuer { get; set; } = string.Empty;
