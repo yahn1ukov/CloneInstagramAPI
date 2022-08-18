@@ -6,7 +6,7 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
     {
         public async Task Create()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

@@ -13,4 +13,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CloneInstagramAPI.Application\CloneInstagramAPI.Application.csproj" />
+    <ProjectReference Include="..\CloneInstagramAPI.Contracts\CloneInstagramAPI.Contracts.csproj" />
+    <ProjectReference Include="..\CloneInstagramAPI.Infrastructure\CloneInstagramAPI.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

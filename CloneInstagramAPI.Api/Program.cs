@@ -1,4 +1,6 @@
 using CloneInstagramAPI.Api;
+using CloneInstagramAPI.Application;
+using CloneInstagramAPI.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {

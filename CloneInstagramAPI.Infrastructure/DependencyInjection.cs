@@ -4,8 +4,8 @@ using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Infrastructure.Authentication;
 using CloneInstagramAPI.Infrastructure.Persistence;
 using CloneInstagramAPI.Infrastructure.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Configuration;
 
 namespace CloneInstagramAPI.Infrastructure
 {
