@@ -2,7 +2,10 @@ using CloneInstagramAPI.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddPresentention();
+    builder.Services
+        .AddPresentention()
+        .AddApplication()
+        .AddInfrastructure(builder.Configuration);
 }
 
 var app = builder.Build();

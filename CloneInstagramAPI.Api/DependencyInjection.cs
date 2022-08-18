@@ -7,6 +7,7 @@
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddAutoMapper(typeof(Program).Assembly);
 
             return services;
         }
