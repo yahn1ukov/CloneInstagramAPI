@@ -3,17 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloneInstagramAPI.Api", "CloneInstagramAPI.Api\CloneInstagramAPI.Api.csproj", "{08C86253-830B-496B-A80A-30FAA07A683E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloneInstagramAPI.Api", "CloneInstagramAPI.Api\CloneInstagramAPI.Api.csproj", "{08C86253-830B-496B-A80A-30FAA07A683E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloneInstagramAPI.Contracts", "CloneInstagramAPI.Contracts\CloneInstagramAPI.Contracts.csproj", "{9057E319-B6D9-4F00-BD78-03E86ED7020C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloneInstagramAPI.Contracts", "CloneInstagramAPI.Contracts\CloneInstagramAPI.Contracts.csproj", "{9057E319-B6D9-4F00-BD78-03E86ED7020C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloneInstagramAPI.Application", "CloneInstagramAPI.Application\CloneInstagramAPI.Application.csproj", "{0B46D79A-2668-4D4A-95DC-CD5F5EA7FCE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloneInstagramAPI.Application", "CloneInstagramAPI.Application\CloneInstagramAPI.Application.csproj", "{0B46D79A-2668-4D4A-95DC-CD5F5EA7FCE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloneInstagramAPI.Domain", "CloneInstagramAPI.Domain\CloneInstagramAPI.Domain.csproj", "{5D971CCB-4470-44BC-BE8B-7FFBEA19CEE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloneInstagramAPI.Domain", "CloneInstagramAPI.Domain\CloneInstagramAPI.Domain.csproj", "{5D971CCB-4470-44BC-BE8B-7FFBEA19CEE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloneInstagramAPI.Infrastructure", "CloneInstagramAPI.Infrastructure\CloneInstagramAPI.Infrastructure.csproj", "{DC650F7F-0273-415E-9AF7-D0D8EE62D97E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloneInstagramAPI.Infrastructure", "CloneInstagramAPI.Infrastructure\CloneInstagramAPI.Infrastructure.csproj", "{DC650F7F-0273-415E-9AF7-D0D8EE62D97E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloneInstagramAPI.Tests", "CloneInstagramAPI.Tests\CloneInstagramAPI.Tests.csproj", "{7D8B68FA-39F6-4CC4-B967-B05FCC864F62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloneInstagramAPI.Tests", "CloneInstagramAPI.Tests\CloneInstagramAPI.Tests.csproj", "{7D8B68FA-39F6-4CC4-B967-B05FCC864F62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requests", "Requests", "{0D0D89D5-166D-4E55-A647-574A426F9E72}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{8E46A2B0-D733-4E72-8E73-95DAD36F36C7}"
+	ProjectSection(SolutionItems) = preProject
+		Login.http = Login.http
+		Registration.http = Registration.http
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +56,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8E46A2B0-D733-4E72-8E73-95DAD36F36C7} = {0D0D89D5-166D-4E55-A647-574A426F9E72}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C44AFB63-4A3D-4974-9C22-6747CF04F73B}

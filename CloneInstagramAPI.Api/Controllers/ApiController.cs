@@ -6,6 +6,7 @@ namespace CloneInstagramAPI.Api.Controllers
     [ApiController]
     public class ApiController : ControllerBase
     {
+        [Route("/error")]
         public IActionResult Problem(List<Error> errors)
         {
             var firstError = errors[0];

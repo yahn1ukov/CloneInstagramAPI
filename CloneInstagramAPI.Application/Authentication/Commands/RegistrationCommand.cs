@@ -4,7 +4,7 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Authentication.Commands
 {
-    public record RegisterCommand
+    public record RegistrationCommand
     (
         string Email,
         string FullName,
