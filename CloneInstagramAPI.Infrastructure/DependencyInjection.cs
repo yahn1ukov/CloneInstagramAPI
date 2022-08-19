@@ -16,16 +16,14 @@ namespace CloneInstagramAPI.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
         {
-
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnectionStrings:DefaultConnection")));
-            services.Configure<JwtTokenSettings>(configuration.GetSection("JwtSettings"));
-
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlServer(configuration.GetConnectionString(ApplicationDbContextSettings.ConnectionStrings)));
+            services.Configure<JwtTokenSettings>(configuration.GetSection(JwtTokenSettings.SectionName));
 
             services.AddScoped<IJwtTokenGenerator,  JwtTokenGenerator>();
             services.AddScoped<IPasswordHashGenerator, PasswordHashGenerator>();
             services.AddScoped<IDateTimeProvider, DateTimeProvider>();
             
-
             services.AddScoped<IUserRepository, UserRepository>();
 
             return services;

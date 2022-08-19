@@ -18,13 +18,6 @@ namespace CloneInstagramAPI.Domain.Entities
         public UserGender Gender { get; set; } = UserGender.MALE;
         public bool IsBanned { get; set; } = false;
         public bool IsDeactived { get; set; } = false;
-        public List<Post> Posts { get; set; } = new List<Post>();
-        public List<Like> Likes { get; set; } = new List<Like>();
-        public List<Save> Saves { get; set; } = new List<Save>();
-        public List<Comment> Comments { get; set; } = new List<Comment>();
-        public List<Follower> Followers { get; set; } = new List<Follower>();
-        public List<Room> Rooms { get; set; } = new List<Room>();
-        public List<Message> Messages { get; set; } = new List<Message>();
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
     }
 }
