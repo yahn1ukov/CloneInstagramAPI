@@ -4,6 +4,7 @@ using CloneInstagramAPI.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CloneInstagramAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220819175254_Create_Follower")]
+    partial class Create_Follower
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,25 +33,9 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
                     b.Property<Guid>("FollowedUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Followers", (string)null);
-                });
-
-            modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Like", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Likes", (string)null);
+                    b.ToTable("Followers");
                 });
 
             modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Post", b =>
@@ -75,7 +61,7 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.User", b =>
@@ -133,18 +119,7 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
-                });
-
-            modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Follower", b =>
-                {
-                    b.HasOne("CloneInstagramAPI.Domain.Entities.User", "User")
-                        .WithMany("Followers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Post", b =>
@@ -160,8 +135,6 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.User", b =>
                 {
-                    b.Navigation("Followers");
-
                     b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618

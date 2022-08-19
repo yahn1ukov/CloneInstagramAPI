@@ -9,5 +9,8 @@ namespace CloneInstagramAPI.Infrastructure.Data
             : base(options) { }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Follower> Followers { get; set; }
+        public DbSet<Like> Likes { get; set; }
     }
 }

@@ -18,6 +18,8 @@ namespace CloneInstagramAPI.Domain.Entities
         public UserGender Gender { get; set; } = UserGender.MALE;
         public bool IsBanned { get; set; } = false;
         public bool IsDeactived { get; set; } = false;
+        public ICollection<Post> Posts { get; set; }
+        public ICollection<Follower> Followers { get; set; }
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
     }
 }
