@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
 using CloneInstagramAPI.Application.Authentication.Commands;
-using CloneInstagramAPI.Application.Authentication.Common;
 using CloneInstagramAPI.Application.Authentication.Queries;
 using CloneInstagramAPI.Contracts.Authentication;
-using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CloneInstagramAPI.Api.Controllers
 {
-    [Route("api/authentication")]
-    public class AuthenticationController : ApiController
+    [ApiController]
+    [Route("[controller]/[action]")]
+    public class AuthenticationController : ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
@@ -21,32 +20,24 @@ namespace CloneInstagramAPI.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("/login")]
+        [HttpPost]
         public async Task<IActionResult> Login(LoginRequest request)
         {
             var command = _mapper.Map<LoginQuery>(request);
 
-            ErrorOr<AuthenticationResult> loginResult = await _mediator.Send(command);
+            var loginResult = await _mediator.Send(command);
 
-            return loginResult.Match
-            (
-                authenticationResult => Ok(_mapper.Map<LoginResponse>(authenticationResult)),
-                errors => Problem(errors)
-            );
+            return Ok(_mapper.Map<LoginResponse>(loginResult));
         }
 
-        [HttpPost("/registration")]
+        [HttpPost]
         public async Task<IActionResult> Registration(RegistrationRequest request)
         {
             var command = _mapper.Map<RegistrationCommand>(request);
 
-            ErrorOr<AuthenticationResult> registrationResult = await _mediator.Send(command);
+            var registrationResult = await _mediator.Send(command);
 
-            return registrationResult.Match
-            (
-                authenticationResult => Created(nameof(Registration), null),
-                errors => Problem(errors)
-            );
+            return Created(nameof(Registration), _mapper.Map<LoginResponse>(registrationResult));
         }
     }
 }

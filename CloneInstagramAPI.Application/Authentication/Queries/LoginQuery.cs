@@ -1,5 +1,4 @@
 ﻿using CloneInstagramAPI.Application.Authentication.Common;
-using ErrorOr;
 using MediatR;
 
 namespace CloneInstagramAPI.Application.Authentication.Queries
@@ -8,5 +7,5 @@ namespace CloneInstagramAPI.Application.Authentication.Queries
     (
         string UserName,
         string Password
-    ) : IRequest<ErrorOr<AuthenticationResult>>;
+    ) : IRequest<AuthenticationResult>;
 }

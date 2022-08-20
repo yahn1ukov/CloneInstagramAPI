@@ -1,4 +1,5 @@
 using CloneInstagramAPI.Api;
+using CloneInstagramAPI.Api.Middleware;
 using CloneInstagramAPI.Application;
 using CloneInstagramAPI.Infrastructure;
 
@@ -12,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 {
-    app.UseExceptionHandler("/error");
+    app.UseMiddleware<ErrorHandlingMiddlware>();
     app.UseHttpsRedirection();
     app.UseAuthentication();
     app.UseAuthorization();

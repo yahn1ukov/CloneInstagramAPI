@@ -1,14 +1,13 @@
 ﻿using CloneInstagramAPI.Application.Authentication.Common;
+using CloneInstagramAPI.Application.Common.Exception.Error.User;
 using CloneInstagramAPI.Application.Common.Interfaces.Authentication;
 using CloneInstagramAPI.Application.Persistence;
-using CloneInstagramAPI.Domain.Common.Errors;
 using CloneInstagramAPI.Domain.Entities;
-using ErrorOr;
 using MediatR;
 
 namespace CloneInstagramAPI.Application.Authentication.Queries
 {
-    public class LoginQueryHandler : IRequestHandler<LoginQuery, ErrorOr<AuthenticationResult>>
+    public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResult>
     {
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private readonly IPasswordHashGenerator _passwordHashGenerator;
@@ -24,16 +23,26 @@ namespace CloneInstagramAPI.Application.Authentication.Queries
             _userRepository = userRepository;
         }
 
-        public async Task<ErrorOr<AuthenticationResult>> Handle(LoginQuery query, CancellationToken cancellationToken)
+        public async Task<AuthenticationResult> Handle(LoginQuery query, CancellationToken cancellationToken)
         {
-            if (await _userRepository.FindByUserName(query.UserName) is not User user)
+            if (await _userRepository.GetByUserName(query.UserName) is not User user)
             {
-                return Errors.User.NotFound;
+                throw new UserNotFoundException();
             }
 
             if (!_passwordHashGenerator.VerifyPasswordHash(query.Password, user.PasswordHash, user.PasswordSalt))
             {
-                return Errors.User.InvalidPassword;
+                throw new UserInvalidPasswordException();
+            }
+
+            if (user.IsBanned)
+            {
+                throw new UserIsBannedException();
+            }
+
+            if (user.IsDeactived)
+            {
+                throw new UserIsDeactivatedException();
             }
 
             var token = _jwtTokenGenerator.GeneratorToken(user);
