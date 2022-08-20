@@ -1,6 +1,5 @@
 ﻿using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Domain.Entities;
-using CloneInstagramAPI.Application.Common.Exception;
 using CloneInstagramAPI.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,11 +16,11 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
 
         public async Task<bool> FindByEmail(string email)
         {
-            if (await _context.Users.AnyAsync(u => u.Email.ToLower().Equals(email.ToLower())) is false)
+            if (await _context.Users.AnyAsync(u => u.Email.ToLower().Equals(email.ToLower())))
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
 
         public async Task Create(User user)

@@ -12,7 +12,7 @@ namespace CloneInstagramAPI.Api.Common.Mapping
         {
             CreateMap<RegistrationRequest, RegistrationCommand>();
             CreateMap<LoginRequest, LoginQuery>();
-            CreateMap<AuthenticationResult, LoginResponse>();
+            CreateMap<AuthenticationResult, AuthenticationResponse>();
         }
     }
 }

@@ -47,7 +47,7 @@ namespace CloneInstagramAPI.Application.Authentication.Queries
 
             var token = _jwtTokenGenerator.GeneratorToken(user);
 
-            return new AuthenticationResult(Token: token, Role: user.Role.ToString());
+            return new AuthenticationResult(token, user.Role.ToString());
         }
     }
 }

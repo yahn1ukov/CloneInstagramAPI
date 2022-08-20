@@ -23,6 +23,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentic
 		Registration.http = Registration.http
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{5AF2243A-FD47-4A19-8986-8A59A0B3D55A}"
+	ProjectSection(SolutionItems) = preProject
+		GetUserByUserName.http = GetUserByUserName.http
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +64,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8E46A2B0-D733-4E72-8E73-95DAD36F36C7} = {0D0D89D5-166D-4E55-A647-574A426F9E72}
+		{5AF2243A-FD47-4A19-8986-8A59A0B3D55A} = {0D0D89D5-166D-4E55-A647-574A426F9E72}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C44AFB63-4A3D-4974-9C22-6747CF04F73B}

@@ -1,6 +1,6 @@
-﻿namespace CloneInstagramAPI.Contracts.User
+﻿namespace CloneInstagramAPI.Application.Users.Common
 {
-    public record ProfileResponse
+    public record ProfileResult
     (
         Guid Id,
         string Email,

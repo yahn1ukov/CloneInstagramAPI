@@ -1,6 +1,6 @@
 ﻿namespace CloneInstagramAPI.Contracts.Authentication
 {
-    public record LoginResponse
+    public record AuthenticationResponse
     (
         string Token,
         string Role

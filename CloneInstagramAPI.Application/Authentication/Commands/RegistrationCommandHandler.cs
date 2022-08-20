@@ -25,7 +25,7 @@ namespace CloneInstagramAPI.Application.Authentication.Commands
 
         public async Task<AuthenticationResult> Handle(RegistrationCommand command, CancellationToken cancellationToken)
         {
-            if (await _userRepository.FindByEmail(command.Email) is true)
+            if (await _userRepository.FindByEmail(command.Email))
             {
                 throw new UserAlreadyExistsException();
             }
@@ -45,7 +45,7 @@ namespace CloneInstagramAPI.Application.Authentication.Commands
 
             var token = _jwtTokenGenerator.GeneratorToken(user);    
 
-            return new AuthenticationResult(Token: token, Role: user.Role.ToString());
+            return new AuthenticationResult(token, user.Role.ToString());
         }
     }
 }
