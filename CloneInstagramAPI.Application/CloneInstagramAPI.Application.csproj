@@ -16,8 +16,4 @@
     <ProjectReference Include="..\CloneInstagramAPI.Domain\CloneInstagramAPI.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Users\Commands\" />
-  </ItemGroup>
-
 </Project>

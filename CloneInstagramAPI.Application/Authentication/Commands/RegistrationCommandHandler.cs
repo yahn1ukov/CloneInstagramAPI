@@ -1,5 +1,4 @@
-﻿using CloneInstagramAPI.Application.Authentication.Common;
-using CloneInstagramAPI.Application.Common.Exception.Error.User;
+﻿using CloneInstagramAPI.Application.Common.Exception.Error.User;
 using CloneInstagramAPI.Application.Common.Interfaces.Authentication;
 using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Domain.Entities;
@@ -7,23 +6,20 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Authentication.Commands
 {
-    public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, AuthenticationResult>
+    public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, bool>
     {
-        private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private readonly IPasswordHashGenerator _passwordHashGenerator;
         private readonly IUserRepository _userRepository;
 
         public RegistrationCommandHandler(
-            IJwtTokenGenerator jwtTokenGenerator,
             IPasswordHashGenerator passwordHashGenerator,
             IUserRepository userRepository)
         {
-            _jwtTokenGenerator = jwtTokenGenerator;
             _passwordHashGenerator = passwordHashGenerator;
             _userRepository = userRepository;
         }
 
-        public async Task<AuthenticationResult> Handle(RegistrationCommand command, CancellationToken cancellationToken)
+        public async Task<bool> Handle(RegistrationCommand command, CancellationToken cancellationToken)
         {
             if (await _userRepository.FindByEmail(command.Email))
             {
@@ -43,9 +39,7 @@ namespace CloneInstagramAPI.Application.Authentication.Commands
 
             await _userRepository.Create(user);
 
-            var token = _jwtTokenGenerator.GeneratorToken(user);    
-
-            return new AuthenticationResult(token, user.Role.ToString());
+            return true;
         }
     }
 }

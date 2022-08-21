@@ -27,7 +27,7 @@ namespace CloneInstagramAPI.Api.Controllers
 
             var result = await _mediator.Send(query);
 
-            return Ok(_mapper.Map<AuthenticationResponse>(result));
+            return Ok(_mapper.Map<LoginResponse>(result));
         }
 
         [HttpPost("registration")]
@@ -37,7 +37,7 @@ namespace CloneInstagramAPI.Api.Controllers
 
             var result = await _mediator.Send(command);
 
-            return Created(nameof(Registration), _mapper.Map<AuthenticationResponse>(result));
+            return Created(nameof(Registration), result);
         }
     }
 }

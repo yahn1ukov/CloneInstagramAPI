@@ -7,5 +7,5 @@ namespace CloneInstagramAPI.Application.Authentication.Queries
     (
         string UserName,
         string Password
-    ) : IRequest<AuthenticationResult>;
+    ) : IRequest<LoginResult>;
 }

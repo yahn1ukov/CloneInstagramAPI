@@ -41,14 +41,19 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             return await _context.Users.SingleOrDefaultAsync(u => u.Id == GetUserId());
         }
 
+        public async Task<User?> GetById(Guid id)
+        {
+            return await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+        }
+
         public async Task<User?> GetByUserName(string username)
         {
             return await _context.Users.SingleOrDefaultAsync(u => u.UserName.ToLower().Equals(username.ToLower()));
-;        }
+        }
 
         public async Task<IEnumerable<User>> GetAll()
         {
-            return await _context.Users.Reverse().ToListAsync();
+            return await _context.Users.ToListAsync();
         }
 
         public async Task Delete(User user)

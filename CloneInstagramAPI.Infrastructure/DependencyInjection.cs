@@ -5,11 +5,9 @@ using CloneInstagramAPI.Infrastructure.Common.Authentication;
 using CloneInstagramAPI.Infrastructure.Data;
 using CloneInstagramAPI.Infrastructure.Persistence;
 using CloneInstagramAPI.Infrastructure.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Text;
 
 namespace CloneInstagramAPI.Infrastructure
 {

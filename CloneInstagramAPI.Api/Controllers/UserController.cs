@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CloneInstagramAPI.Application.Users.Commands;
 using CloneInstagramAPI.Application.Users.Queries;
 using CloneInstagramAPI.Contracts.User;
 using MediatR;
@@ -21,6 +22,16 @@ namespace CloneInstagramAPI.Api.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet("current")]
+        public async Task<IActionResult> GetById()
+        {
+            var query = new GetCurrentUserByIdQuery();
+
+            var result = await _mediator.Send(query);
+
+            return Ok(_mapper.Map<ProfileResponse>(result));
+        }
+
         [HttpGet("{username}")]
         public async Task<IActionResult> GetByUserName(string username)
         {
@@ -31,14 +42,14 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok(_mapper.Map<ProfileResponse>(result));
         }
 
-        [HttpGet("current")]
-        public async Task<IActionResult> GetById()
+        [HttpDelete("current")]
+        public async Task<IActionResult> Delete()
         {
-            var query = new GetUserByIdQuery();
+            var command = new DeleteCurrentUserByIdCommand();
 
-            var result = await _mediator.Send(query);
+            var result = await _mediator.Send(command);
 
-            return Ok(_mapper.Map<ProfileResponse>(result));
+            return Ok(result);
         }
     }
 }

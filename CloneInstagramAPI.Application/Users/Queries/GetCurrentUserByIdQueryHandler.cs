@@ -6,16 +6,16 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Users.Queries
 {
-    public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, ProfileResult>
+    public class GetCurrentUserByIdQueryHandler : IRequestHandler<GetCurrentUserByIdQuery, ProfileResult>
     {
         private readonly IUserRepository _userRepository;
 
-        public GetUserByIdQueryHandler(IUserRepository userRepository)
+        public GetCurrentUserByIdQueryHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository; 
         }
         
-        public async Task<ProfileResult> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ProfileResult> Handle(GetCurrentUserByIdQuery request, CancellationToken cancellationToken)
         {
             if (await _userRepository.GetById() is not User user)
             {

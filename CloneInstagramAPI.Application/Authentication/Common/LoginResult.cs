@@ -1,6 +1,6 @@
 ﻿namespace CloneInstagramAPI.Application.Authentication.Common
 {
-    public record AuthenticationResult
+    public record LoginResult
     (
         string Token,
         string Role

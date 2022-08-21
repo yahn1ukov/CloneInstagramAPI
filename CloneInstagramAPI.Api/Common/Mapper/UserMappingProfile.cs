@@ -9,6 +9,7 @@ namespace CloneInstagramAPI.Api.Common.Mapping
         public UserMappingProfile()
         {
             CreateMap<ProfileResult, ProfileResponse>();
+            CreateMap<AllUsersResult, AllUsersResponse>();
         }
     }
 }

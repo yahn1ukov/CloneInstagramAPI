@@ -7,7 +7,7 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Authentication.Queries
 {
-    public class LoginQueryHandler : IRequestHandler<LoginQuery, AuthenticationResult>
+    public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginResult>
     {
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private readonly IPasswordHashGenerator _passwordHashGenerator;
@@ -23,7 +23,7 @@ namespace CloneInstagramAPI.Application.Authentication.Queries
             _userRepository = userRepository;
         }
 
-        public async Task<AuthenticationResult> Handle(LoginQuery query, CancellationToken cancellationToken)
+        public async Task<LoginResult> Handle(LoginQuery query, CancellationToken cancellationToken)
         {
             if (await _userRepository.GetByUserName(query.UserName) is not User user)
             {
@@ -47,7 +47,7 @@ namespace CloneInstagramAPI.Application.Authentication.Queries
 
             var token = _jwtTokenGenerator.GeneratorToken(user);
 
-            return new AuthenticationResult(token, user.Role.ToString());
+            return new LoginResult(token, user.Role.ToString());
         }
     }
 }
