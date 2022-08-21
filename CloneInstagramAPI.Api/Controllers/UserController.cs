@@ -19,7 +19,7 @@ namespace CloneInstagramAPI.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("/{username}")]
+        [HttpGet("{username}")]
         public async Task<IActionResult> GetByUserName(string username)
         {
             var query = new GetUserByUserNameQuery(username);

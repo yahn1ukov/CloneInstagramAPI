@@ -20,7 +20,7 @@ namespace CloneInstagramAPI.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("/login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
             var query = _mapper.Map<LoginQuery>(request);
@@ -30,7 +30,7 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok(_mapper.Map<AuthenticationResponse>(result));
         }
 
-        [HttpPost("/registration")]
+        [HttpPost("registration")]
         public async Task<IActionResult> Registration(RegistrationRequest request)
         {
             var command = _mapper.Map<RegistrationCommand>(request);
