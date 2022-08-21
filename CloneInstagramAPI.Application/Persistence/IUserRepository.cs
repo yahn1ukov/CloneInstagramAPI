@@ -6,7 +6,7 @@ namespace CloneInstagramAPI.Application.Persistence
     {
         Task<bool> FindByEmail(string email);
         Task Create(User user);
-        Task<User?> Get(Guid id);
+        Task<User?> GetById();
         Task<User?> GetByUserName(string username);
         Task<IEnumerable<User>> GetAll();
         Task Delete(User user);

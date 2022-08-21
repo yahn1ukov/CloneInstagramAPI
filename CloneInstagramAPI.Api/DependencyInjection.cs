@@ -9,6 +9,8 @@ namespace CloneInstagramAPI.Api
         public static IServiceCollection AddPresentention(this IServiceCollection services, ConfigurationManager configuration)
         {
             services.AddControllers();
+            services.AddEndpointsApiExplorer();
+            services.AddHttpContextAccessor();
             services.AddAutoMapper(typeof(Program).Assembly);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
             {
@@ -17,8 +19,8 @@ namespace CloneInstagramAPI.Api
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetSection("JwtSettings:Secret").Value)),
                     RequireExpirationTime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidateIssuer = true,
-                    ValidateAudience = true
+                    ValidateIssuer = false,
+                    ValidateAudience = false
                 };
             });
 

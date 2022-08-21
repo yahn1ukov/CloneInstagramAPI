@@ -1,18 +1,25 @@
 ﻿using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Domain.Entities;
 using CloneInstagramAPI.Infrastructure.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace CloneInstagramAPI.Infrastructure.Persistence
 {
     public class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserRepository(ApplicationDbContext context)
+        public UserRepository(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
+
+        private Guid GetUserId()
+            => Guid.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "");
 
         public async Task<bool> FindByEmail(string email)
         {
@@ -29,9 +36,9 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             await _context.SaveChangesAsync();
         }
 
-        public async Task<User?> Get(Guid id)
+        public async Task<User?> GetById()
         {
-            return await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+            return await _context.Users.SingleOrDefaultAsync(u => u.Id == GetUserId());
         }
 
         public async Task<User?> GetByUserName(string username)
