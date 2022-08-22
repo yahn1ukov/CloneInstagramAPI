@@ -31,7 +31,6 @@ namespace CloneInstagramAPI.Api.Middleware
             {
                 400 => HttpStatusCode.BadRequest,
                 404 => HttpStatusCode.NotFound,
-                409 => HttpStatusCode.Conflict,
                 _ => HttpStatusCode.InternalServerError
             };
 
@@ -43,8 +42,10 @@ namespace CloneInstagramAPI.Api.Middleware
                     timestamp = DateTime.Now 
                 }
             );
+
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
+
             return context.Response.WriteAsync(result);
         }
     }

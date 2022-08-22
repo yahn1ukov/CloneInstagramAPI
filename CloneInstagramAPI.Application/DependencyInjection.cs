@@ -7,6 +7,7 @@ namespace CloneInstagramAPI.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(DependencyInjection).Assembly);
             services.AddMediatR(typeof(DependencyInjection).Assembly);
 
             return services;

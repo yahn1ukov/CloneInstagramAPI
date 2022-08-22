@@ -24,7 +24,7 @@ namespace CloneInstagramAPI.Application.Users.Commands
 
             if (user.Role.Equals(UserRole.ADMIN))
             {
-                throw new UserAdminNotChangeRoleException();   
+                throw new UserAdminNotChangeRoleException();
             }
 
             if (Enum.GetName(typeof(UserRole), command.NewRole) is null)

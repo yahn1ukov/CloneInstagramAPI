@@ -1,5 +1,4 @@
-﻿using CloneInstagramAPI.Application.Authentication.Common;
-using MediatR;
+﻿using MediatR;
 
 namespace CloneInstagramAPI.Application.Authentication.Commands
 {

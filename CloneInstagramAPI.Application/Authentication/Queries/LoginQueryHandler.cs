@@ -14,8 +14,8 @@ namespace CloneInstagramAPI.Application.Authentication.Queries
         private readonly IUserRepository _userRepository;
 
         public LoginQueryHandler(
-            IJwtTokenGenerator jwtTokenGenerator, 
-            IPasswordHashGenerator passwordHashGenerator, 
+            IJwtTokenGenerator jwtTokenGenerator,
+            IPasswordHashGenerator passwordHashGenerator,
             IUserRepository userRepository)
         {
             _jwtTokenGenerator = jwtTokenGenerator;

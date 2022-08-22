@@ -1,4 +1,5 @@
-﻿using CloneInstagramAPI.Application.Common.Exception.Error.User;
+﻿using AutoMapper;
+using CloneInstagramAPI.Application.Common.Exception.Error.User;
 using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Application.Users.Common;
 using CloneInstagramAPI.Domain.Entities;
@@ -9,10 +10,12 @@ namespace CloneInstagramAPI.Application.Users.Queries
     public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, ProfileResult>
     {
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public GetUserByIdQueryHandler(IUserRepository userRepository)
+        public GetUserByIdQueryHandler(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         public async Task<ProfileResult> Handle(GetUserByIdQuery query, CancellationToken cancellationToken)
@@ -22,17 +25,7 @@ namespace CloneInstagramAPI.Application.Users.Queries
                 throw new UserNotFoundException();
             }
 
-            return new ProfileResult
-            (
-                user.Id,
-                user.Email,
-                user.FullName,
-                user.UserName,
-                user.Avatar,
-                user.WebSite,
-                user.PhoneNumber,
-                user.Biography
-            );
+            return _mapper.Map<ProfileResult>(user);
         }
     }
 }

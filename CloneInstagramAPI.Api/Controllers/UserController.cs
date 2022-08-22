@@ -42,6 +42,26 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok(_mapper.Map<ProfileResponse>(result));
         }
 
+        [HttpPatch]
+        public async Task<IActionResult> Update(UpdateUserRequest request)
+        {
+            var command = _mapper.Map<UpdateUserCommand>(request);
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpPatch("password")]
+        public async Task<IActionResult> UpdatePassword(UpdateUserPasswordRequest request)
+        {
+            var command = _mapper.Map<UpdateUserPasswordCommand>(request);
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
         [HttpDelete]
         public async Task<IActionResult> Delete()
         {

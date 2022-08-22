@@ -2,7 +2,7 @@
 
 namespace CloneInstagramAPI.Contracts.User
 {
-    public record ChangePasswordRequest
+    public record UpdateUserPasswordRequest
     (
         string OldPassword,
         string NewPassword,

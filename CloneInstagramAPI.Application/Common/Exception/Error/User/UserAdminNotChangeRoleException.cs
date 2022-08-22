@@ -5,6 +5,6 @@ namespace CloneInstagramAPI.Application.Common.Exception.Error.User
     public class UserAdminNotChangeRoleException : CustomException
     {
         public UserAdminNotChangeRoleException()
-            : base(400, "Cannot change the role of the admin.") { }
+            : base(400, "Can't change the role to the admin.") { }
     }
 }

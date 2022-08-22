@@ -3,8 +3,8 @@
 namespace CloneInstagramAPI.Application.Common.Exception.Error.User
 {
     public class UserSameUserNameAlreadyExistsException : CustomException
-    { 
-        public UserSameUserNameAlreadyExistsException() 
+    {
+        public UserSameUserNameAlreadyExistsException()
             : base(400, "User with same username already exists.") { }
     }
 }

@@ -22,6 +22,7 @@ namespace CloneInstagramAPI.Application.Users.Commands
             }
 
             await _userRepository.Delete(user);
+
             return true;
         }
     }
