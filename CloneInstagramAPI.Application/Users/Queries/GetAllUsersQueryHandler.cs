@@ -1,6 +1,5 @@
 ﻿using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Application.Users.Common;
-using CloneInstagramAPI.Domain.Entities;
 using MediatR;
 
 namespace CloneInstagramAPI.Application.Users.Queries

@@ -22,62 +22,6 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Follower", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("FollowedUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Followers", (string)null);
-                });
-
-            modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Like", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Likes", (string)null);
-                });
-
-            modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Post", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Posts", (string)null);
-                });
-
             modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -101,7 +45,7 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Gender")
+                    b.Property<int?>("Gender")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsBanned")
@@ -133,36 +77,7 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
-                });
-
-            modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Follower", b =>
-                {
-                    b.HasOne("CloneInstagramAPI.Domain.Entities.User", "User")
-                        .WithMany("Followers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Post", b =>
-                {
-                    b.HasOne("CloneInstagramAPI.Domain.Entities.User", "User")
-                        .WithMany("Posts")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.User", b =>
-                {
-                    b.Navigation("Followers");
-
-                    b.Navigation("Posts");
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

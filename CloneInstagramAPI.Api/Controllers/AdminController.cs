@@ -37,6 +37,26 @@ namespace CloneInstagramAPI.Api.Controllers
             );
         }
 
+        [HttpGet("users/{userId}")]
+        public async Task<IActionResult> GetByUserName(Guid userId)
+        {
+            var query = new GetUserByIdQuery(userId);
+
+            var result = await _mediator.Send(query);
+
+            return Ok(_mapper.Map<ProfileResponse>(result));
+        }
+
+        [HttpPatch("users/{userId}")]
+        public async Task<IActionResult> UpdateRole(Guid userId, UpdateUserRoleRequest request)
+        {
+            var command = new UpdateUserRoleCommand(userId, request.NewRole);
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
         [HttpDelete("users/{userId}")]
         public async Task<IActionResult> Delete(Guid userId)
         {

@@ -1,5 +1,6 @@
 ﻿using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Domain.Entities;
+using CloneInstagramAPI.Domain.Enums;
 using CloneInstagramAPI.Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -21,9 +22,27 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
         private Guid GetUserId()
             => Guid.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "");
 
-        public async Task<bool> FindByEmail(string email)
+        public async Task<bool> ExistsAdmin()
+        {
+            if (await _context.Users.AnyAsync(u => u.Role.Equals(UserRole.ADMIN)))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> ExistsByEmail(string email)
         {
             if (await _context.Users.AnyAsync(u => u.Email.ToLower().Equals(email.ToLower())))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> ExistsByUserName(string username)
+        {
+            if (await _context.Users.AnyAsync(u => u.UserName.ToLower().Equals(username.ToLower())))
             {
                 return true;
             }
@@ -54,6 +73,12 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
         public async Task<IEnumerable<User>> GetAll()
         {
             return await _context.Users.ToListAsync();
+        }
+
+        public async Task Update(User user)
+        {
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
         }
 
         public async Task Delete(User user)

@@ -2,6 +2,7 @@
 using CloneInstagramAPI.Application.Common.Interfaces.Authentication;
 using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Domain.Entities;
+using CloneInstagramAPI.Domain.Enums;
 using MediatR;
 
 namespace CloneInstagramAPI.Application.Authentication.Commands
@@ -21,9 +22,14 @@ namespace CloneInstagramAPI.Application.Authentication.Commands
 
         public async Task<bool> Handle(RegistrationCommand command, CancellationToken cancellationToken)
         {
-            if (await _userRepository.FindByEmail(command.Email))
+            if (await _userRepository.ExistsByEmail(command.Email))
             {
-                throw new UserAlreadyExistsException();
+                throw new UserSameEmailAlreadyExistsException();
+            }
+
+            if (await _userRepository.ExistsByUserName(command.UserName))
+            {
+                throw new UserSameUserNameAlreadyExistsException();
             }
 
             _passwordHashGenerator.GeneratePasswordHash(command.Password, out byte[] passwordHash, out byte[] passwortSalt);
@@ -36,6 +42,11 @@ namespace CloneInstagramAPI.Application.Authentication.Commands
                 PasswordHash = passwordHash,
                 PasswordSalt = passwortSalt
             };
+
+            if (!(await _userRepository.ExistsAdmin()))
+            {
+                user.Role = UserRole.ADMIN;
+            }
 
             await _userRepository.Create(user);
 

@@ -4,12 +4,15 @@ namespace CloneInstagramAPI.Application.Persistence
 {
     public interface IUserRepository
     {
-        Task<bool> FindByEmail(string email);
+        Task<bool> ExistsAdmin();
+        Task<bool> ExistsByEmail(string email);
+        Task<bool> ExistsByUserName(string username);
         Task Create(User user);
         Task<User?> GetById();
         Task<User?> GetById(Guid id);
         Task<User?> GetByUserName(string username);
         Task<IEnumerable<User>> GetAll();
+        Task Update(User user);
         Task Delete(User user);
     }
 }

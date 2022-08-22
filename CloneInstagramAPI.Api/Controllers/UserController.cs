@@ -22,7 +22,7 @@ namespace CloneInstagramAPI.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("current")]
+        [HttpGet]
         public async Task<IActionResult> GetById()
         {
             var query = new GetCurrentUserByIdQuery();
@@ -42,7 +42,7 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok(_mapper.Map<ProfileResponse>(result));
         }
 
-        [HttpDelete("current")]
+        [HttpDelete]
         public async Task<IActionResult> Delete()
         {
             var command = new DeleteCurrentUserByIdCommand();

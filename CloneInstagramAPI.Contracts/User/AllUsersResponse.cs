@@ -7,7 +7,7 @@
         string FullName,
         string UserName,
         string Role,
-        string Gender,
+        string? Gender,
         string? Avatar,
         DateTimeOffset CreatedAt
     );

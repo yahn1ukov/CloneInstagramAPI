@@ -15,11 +15,9 @@ namespace CloneInstagramAPI.Domain.Entities
         public string? WebSite { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Biography { get; set; }
-        public UserGender Gender { get; set; } = UserGender.MALE;
+        public UserGender? Gender { get; set; }
         public bool IsBanned { get; set; } = false;
         public bool IsDeactived { get; set; } = false;
-        public ICollection<Post> Posts { get; set; }
-        public ICollection<Follower> Followers { get; set; }
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
     }
 }
