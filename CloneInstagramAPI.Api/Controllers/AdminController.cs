@@ -57,6 +57,27 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPatch("users/{userId}/ban")]
+        public async Task<IActionResult> Ban(Guid userId)
+        { 
+            var command = new BanUserByIdCommand(userId);
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpPatch("users/{userId}/unban")]
+        public async Task<IActionResult> UnBan(Guid userId)
+        {
+            var command = new UnbanUserByIdCommand(userId);
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+
         [HttpDelete("users/{userId}")]
         public async Task<IActionResult> Delete(Guid userId)
         {

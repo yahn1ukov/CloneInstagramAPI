@@ -9,6 +9,6 @@
         string? Biography,
         string Email,
         string? PhoneNumber,
-        string? Gender
+        int? Gender
     );
 }

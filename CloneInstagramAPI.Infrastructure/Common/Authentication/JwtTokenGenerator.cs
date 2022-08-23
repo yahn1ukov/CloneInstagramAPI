@@ -36,6 +36,8 @@ namespace CloneInstagramAPI.Infrastructure.Common.Authentication
 
             var token = new JwtSecurityToken
             (
+                issuer: _jwtTokenSettings.Issuer,
+                audience: _jwtTokenSettings.Audience,
                 signingCredentials: signingCredentials,
                 expires: _dateTimeProvider.UtcNow.AddHours(_jwtTokenSettings.ExpiryMinutes),
                 claims: claims

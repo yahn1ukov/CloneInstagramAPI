@@ -2,7 +2,7 @@
 
 namespace CloneInstagramAPI.Application.Users.Commands
 {
-    public record UpdateUserPasswordCommand
+    public record UpdateCurrentUserPasswordCommand
     (
         string OldPassword,
         string NewPassword,

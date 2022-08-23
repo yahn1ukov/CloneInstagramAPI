@@ -2,7 +2,7 @@
 
 namespace CloneInstagramAPI.Application.Users.Commands
 {
-    public record UpdateUserCommand
+    public record UpdateCurrentUserCommand
     (
         string? Avavtar,
         string FullName,
@@ -11,6 +11,6 @@ namespace CloneInstagramAPI.Application.Users.Commands
         string? Biography,
         string Email,
         string? PhoneNumber,
-        string? Gender
+        int? Gender
     ) : IRequest<bool>;
 }

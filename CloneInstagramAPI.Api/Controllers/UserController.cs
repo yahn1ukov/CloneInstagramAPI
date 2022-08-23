@@ -45,7 +45,7 @@ namespace CloneInstagramAPI.Api.Controllers
         [HttpPatch]
         public async Task<IActionResult> Update(UpdateUserRequest request)
         {
-            var command = _mapper.Map<UpdateUserCommand>(request);
+            var command = _mapper.Map<UpdateCurrentUserCommand>(request);
 
             var result = await _mediator.Send(command);
 
@@ -55,7 +55,7 @@ namespace CloneInstagramAPI.Api.Controllers
         [HttpPatch("password")]
         public async Task<IActionResult> UpdatePassword(UpdateUserPasswordRequest request)
         {
-            var command = _mapper.Map<UpdateUserPasswordCommand>(request);
+            var command = _mapper.Map<UpdateCurrentUserPasswordCommand>(request);
 
             var result = await _mediator.Send(command);
 

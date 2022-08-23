@@ -6,12 +6,12 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Users.Commands
 {
-    public class UpdateUserPasswordCommandHandler : IRequestHandler<UpdateUserPasswordCommand, bool>
+    public class UpdateCurrentUserPasswordCommandHandler : IRequestHandler<UpdateCurrentUserPasswordCommand, bool>
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHashGenerator _passwordHashGenerator;
 
-        public UpdateUserPasswordCommandHandler(
+        public UpdateCurrentUserPasswordCommandHandler(
             IUserRepository userRepository,
             IPasswordHashGenerator passwordHashGenerator)
         {
@@ -19,7 +19,7 @@ namespace CloneInstagramAPI.Application.Users.Commands
             _passwordHashGenerator = passwordHashGenerator;
         }
 
-        public async Task<bool> Handle(UpdateUserPasswordCommand command, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdateCurrentUserPasswordCommand command, CancellationToken cancellationToken)
         {
             if (await _userRepository.GetById() is not User user)
             {

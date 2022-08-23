@@ -25,15 +25,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{5AF2243A-FD47-4A19-8986-8A59A0B3D55A}"
 	ProjectSection(SolutionItems) = preProject
-		GetUserByUserName.http = GetUserByUserName.http
 		DeleteCurrentUserById.http = DeleteCurrentUserById.http
 		GetCurrentUserById.http = GetCurrentUserById.http
+		GetUserByUserName.http = GetUserByUserName.http
+		UpdateCurrentUser.http = UpdateCurrentUser.http
+		UpdateCurrentUserPassword.http = UpdateCurrentUserPassword.http
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admins", "Admins", "{34EA5FD5-34E1-4A40-8523-3A03EFAD3717}"
 	ProjectSection(SolutionItems) = preProject
-		GetAllUsers.http = GetAllUsers.http
 		DeleteUserById.http = DeleteUserById.http
+		GetAllUsers.http = GetAllUsers.http
 		GetUser.http = GetUser.http
 		UpdateUserRole.http = UpdateUserRole.http
 	EndProjectSection
