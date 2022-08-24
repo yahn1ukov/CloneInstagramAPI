@@ -7,7 +7,7 @@ namespace CloneInstagramAPI.Domain.Entities
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Email { get; set; } = string.Empty;
         public string FullName { get; set; } = string.Empty;
-        public string UserName { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public UserRole Role { get; set; } = UserRole.USER;
@@ -17,7 +17,8 @@ namespace CloneInstagramAPI.Domain.Entities
         public string? Biography { get; set; }
         public UserGender? Gender { get; set; }
         public bool IsBanned { get; set; } = false;
-        public bool IsDeactived { get; set; } = false;
+        public bool IsDeactivated { get; set; } = false;
+        public ICollection<Post> Posts { get; set; } = new List<Post>();
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
     }
 }

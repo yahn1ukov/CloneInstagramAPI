@@ -7,20 +7,20 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Users.Queries
 {
-    public class GetUserByUserNameQueryHandler : IRequestHandler<GetUserByUserNameQuery, ProfileResult>
+    public class GetUserByUsernameQueryHandler : IRequestHandler<GetUserByUsernameQuery, ProfileResult>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public GetUserByUserNameQueryHandler(IUserRepository userRepository, IMapper mapper)
+        public GetUserByUsernameQueryHandler(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;
         }
 
-        public async Task<ProfileResult> Handle(GetUserByUserNameQuery query, CancellationToken cancellationToken)
+        public async Task<ProfileResult> Handle(GetUserByUsernameQuery query, CancellationToken cancellationToken)
         {
-            if (await _userRepository.GetByUserName(query.UserName) is not User user)
+            if (await _userRepository.GetByUsername(query.Username) is not User user)
             {
                 throw new UserNotFoundException();
             }

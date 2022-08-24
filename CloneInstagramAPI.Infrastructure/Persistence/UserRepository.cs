@@ -20,7 +20,7 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
         }
 
         private Guid GetUserId()
-            => Guid.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "");
+            => Guid.Parse(_httpContextAccessor?.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "");
 
         public async Task<bool> ExistsAdmin()
         {
@@ -40,9 +40,9 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             return false;
         }
 
-        public async Task<bool> ExistsByUserName(string username)
+        public async Task<bool> ExistsByUsername(string username)
         {
-            if (await _context.Users.AnyAsync(u => u.UserName.ToLower().Equals(username.ToLower())))
+            if (await _context.Users.AnyAsync(u => u.Username.ToLower().Equals(username.ToLower())))
             {
                 return true;
             }
@@ -66,9 +66,9 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             return await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task<User?> GetByUserName(string username)
+        public async Task<User?> GetByUsername(string username)
         {
-            return await _context.Users.SingleOrDefaultAsync(u => u.UserName.ToLower().Equals(username.ToLower()));
+            return await _context.Users.SingleOrDefaultAsync(u => u.Username.ToLower().Equals(username.ToLower()));
         }
 
         public async Task<IEnumerable<User>> GetAll()

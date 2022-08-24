@@ -23,7 +23,7 @@ namespace CloneInstagramAPI.Application.Users.Commands
 
             if (!user.IsBanned)
             {
-                throw new UserIsUnBannedException();
+                throw new UserIsUnbannedException();
             }
 
             user.IsBanned = false;

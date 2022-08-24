@@ -27,9 +27,9 @@ namespace CloneInstagramAPI.Application.Authentication.Commands
                 throw new UserSameEmailAlreadyExistsException();
             }
 
-            if (await _userRepository.ExistsByUserName(command.UserName))
+            if (await _userRepository.ExistsByUsername(command.Username))
             {
-                throw new UserSameUserNameAlreadyExistsException();
+                throw new UserSameUsernameAlreadyExistsException();
             }
 
             _passwordHashGenerator.GeneratePasswordHash(command.Password, out byte[] passwordHash, out byte[] passwortSalt);
@@ -38,7 +38,7 @@ namespace CloneInstagramAPI.Application.Authentication.Commands
             {
                 Email = command.Email,
                 FullName = command.FullName,
-                UserName = command.UserName,
+                Username = command.Username,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwortSalt
             };

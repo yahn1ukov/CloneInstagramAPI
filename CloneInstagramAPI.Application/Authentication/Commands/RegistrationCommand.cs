@@ -6,7 +6,7 @@ namespace CloneInstagramAPI.Application.Authentication.Commands
     (
         string Email,
         string FullName,
-        string UserName,
+        string Username,
         string Password
     ) : IRequest<bool>;
 }

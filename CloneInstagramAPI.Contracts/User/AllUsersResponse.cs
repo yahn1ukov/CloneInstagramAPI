@@ -5,7 +5,7 @@
         Guid Id,
         string Email,
         string FullName,
-        string UserName,
+        string Username,
         string Role,
         string? Gender,
         string? Avatar,

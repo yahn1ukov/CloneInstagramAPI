@@ -6,7 +6,7 @@ namespace CloneInstagramAPI.Application.Users.Commands
     (
         string? Avavtar,
         string FullName,
-        string UserName,
+        string Username,
         string? WebSite,
         string? Biography,
         string Email,

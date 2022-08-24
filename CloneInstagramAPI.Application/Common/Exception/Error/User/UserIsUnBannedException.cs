@@ -2,9 +2,9 @@
 
 namespace CloneInstagramAPI.Application.Common.Exception.Error.User
 {
-    public class UserIsUnBannedException : CustomException
+    public class UserIsUnbannedException : CustomException
     {
-        public UserIsUnBannedException()
+        public UserIsUnbannedException()
             : base(400, "User is unbanned.") { }
     }
 }

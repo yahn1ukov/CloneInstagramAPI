@@ -25,7 +25,7 @@ namespace CloneInstagramAPI.Application.Authentication.Queries
 
         public async Task<LoginResult> Handle(LoginQuery query, CancellationToken cancellationToken)
         {
-            if (await _userRepository.GetByUserName(query.UserName) is not User user)
+            if (await _userRepository.GetByUsername(query.Username) is not User user)
             {
                 throw new UserNotFoundException();
             }
@@ -40,7 +40,7 @@ namespace CloneInstagramAPI.Application.Authentication.Queries
                 throw new UserIsBannedException();
             }
 
-            if (user.IsDeactived)
+            if (user.IsDeactivated)
             {
                 throw new UserIsDeactivatedException();
             }

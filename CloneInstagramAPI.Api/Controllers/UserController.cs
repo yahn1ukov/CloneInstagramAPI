@@ -35,7 +35,7 @@ namespace CloneInstagramAPI.Api.Controllers
         [HttpGet("{username}")]
         public async Task<IActionResult> GetByUserName(string username)
         {
-            var query = new GetUserByUserNameQuery(username);
+            var query = new GetUserByUsernameQuery(username);
 
             var result = await _mediator.Send(query);
 

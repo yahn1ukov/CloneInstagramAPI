@@ -4,7 +4,7 @@ namespace CloneInstagramAPI.Application.Users.Commands
 {
     public record UpdateUserRoleCommand
     (
-        Guid Id,
+        Guid UserId,
         int NewRole
     ) : IRequest<bool>;
 }

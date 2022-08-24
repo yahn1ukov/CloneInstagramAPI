@@ -17,7 +17,7 @@ namespace CloneInstagramAPI.Application.Users.Commands
 
         public async Task<bool> Handle(UpdateUserRoleCommand command, CancellationToken cancellationToken)
         {
-            if (await _userRepository.GetById(command.Id) is not User user)
+            if (await _userRepository.GetById(command.UserId) is not User user)
             {
                 throw new UserNotFoundException();
             }

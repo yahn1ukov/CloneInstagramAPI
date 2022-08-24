@@ -20,7 +20,7 @@ namespace CloneInstagramAPI.Application.Users.Queries
 
         public async Task<ProfileResult> Handle(GetUserByIdQuery query, CancellationToken cancellationToken)
         {
-            if (await _userRepository.GetById(query.Id) is not User user)
+            if (await _userRepository.GetById(query.UserId) is not User user)
             {
                 throw new UserNotFoundException();
             }

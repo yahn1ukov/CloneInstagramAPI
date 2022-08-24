@@ -4,7 +4,7 @@
     (
         string Email,
         string FullName,
-        string UserName,
+        string Username,
         string Password
     );
 }

@@ -5,7 +5,7 @@ namespace CloneInstagramAPI.Application.Authentication.Queries
 {
     public record LoginQuery
     (
-        string UserName,
+        string Username,
         string Password
     ) : IRequest<LoginResult>;
 }

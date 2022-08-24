@@ -6,11 +6,11 @@ namespace CloneInstagramAPI.Application.Persistence
     {
         Task<bool> ExistsAdmin();
         Task<bool> ExistsByEmail(string email);
-        Task<bool> ExistsByUserName(string username);
+        Task<bool> ExistsByUsername(string username);
         Task Create(User user);
         Task<User?> GetById();
         Task<User?> GetById(Guid id);
-        Task<User?> GetByUserName(string username);
+        Task<User?> GetByUsername(string username);
         Task<IEnumerable<User>> GetAll();
         Task Update(User user);
         Task Delete(User user);

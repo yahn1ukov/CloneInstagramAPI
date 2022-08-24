@@ -2,7 +2,7 @@
 {
     public record LoginRequest
     (
-        string UserName,
+        string Username,
         string Password
     );
 }

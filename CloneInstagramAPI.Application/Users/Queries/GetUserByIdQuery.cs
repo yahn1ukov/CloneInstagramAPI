@@ -3,5 +3,5 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Users.Queries
 {
-    public record GetUserByIdQuery(Guid Id) : IRequest<ProfileResult>;
+    public record GetUserByIdQuery(Guid UserId) : IRequest<ProfileResult>;
 }
