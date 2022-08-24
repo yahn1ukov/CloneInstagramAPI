@@ -1,6 +1,6 @@
-﻿namespace CloneInstagramAPI.Contracts.Post
+﻿namespace CloneInstagramAPI.Application.Posts.Common
 {
-    public record PostResponse
+    public record PostResult
     (
         Guid Id,
         string Content,

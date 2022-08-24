@@ -1,6 +1,6 @@
 ﻿namespace CloneInstagramAPI.Contracts.Post
 {
-    public record AddPostRequest
+    public record CreatePostRequest
     (
         string Content,
         string? Description
