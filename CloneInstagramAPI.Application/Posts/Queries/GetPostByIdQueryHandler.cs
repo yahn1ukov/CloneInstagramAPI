@@ -17,7 +17,7 @@ namespace CloneInstagramAPI.Application.Posts.Queries
 
         public async Task<PostResult> Handle(GetPostByIdQuery query, CancellationToken cancellationToken)
         {
-            if (await _postRepository.GetById(query.Id) is not Post post)
+            if (await _postRepository.GetById(query.PostId) is not Post post)
             {
                 throw new PostNotFoundException();
             }
