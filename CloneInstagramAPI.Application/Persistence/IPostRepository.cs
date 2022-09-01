@@ -8,6 +8,7 @@ namespace CloneInstagramAPI.Application.Persistence
         Task<Post?> GetById(Guid id);
         Task<IEnumerable<Post>> GetAll();
         Task<IEnumerable<Post>> GetAllUsersById(Guid id);
+        Task Update(Post post);
         Task Delete(Post post);
     }
 }

@@ -41,6 +41,7 @@ namespace CloneInstagramAPI.Infrastructure
             services.AddScoped<IDateTimeProvider, DateTimeProvider>();
             
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
 
             return services;
         }

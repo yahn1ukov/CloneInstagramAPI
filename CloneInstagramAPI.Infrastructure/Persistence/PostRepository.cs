@@ -1,9 +1,7 @@
 ﻿using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Domain.Entities;
 using CloneInstagramAPI.Infrastructure.Data;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace CloneInstagramAPI.Infrastructure.Persistence
 {
@@ -39,6 +37,13 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
                 .Include(u => u.User)
                 .Where(p => p.User.Id == id)
                 .ToListAsync();
+        }
+
+        public async Task Update(Post post)
+        {
+            _context.Posts.Update(post);
+
+            await _context.SaveChangesAsync();
         }
 
         public async Task Delete(Post post)

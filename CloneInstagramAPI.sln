@@ -17,27 +17,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloneInstagramAPI.Tests", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requests", "Requests", "{0D0D89D5-166D-4E55-A647-574A426F9E72}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{8E46A2B0-D733-4E72-8E73-95DAD36F36C7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{7D97B9E8-F5E6-48CA-90C1-360E51FB2A2D}"
 	ProjectSection(SolutionItems) = preProject
 		Login.http = Login.http
 		Registration.http = Registration.http
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{5AF2243A-FD47-4A19-8986-8A59A0B3D55A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{8D1BCC95-98C7-44E0-BC67-A409D220F100}"
 	ProjectSection(SolutionItems) = preProject
-		DeleteCurrentUserById.http = DeleteCurrentUserById.http
-		GetCurrentUserById.http = GetCurrentUserById.http
-		GetUserByUserName.http = GetUserByUserName.http
-		UpdateCurrentUser.http = UpdateCurrentUser.http
-		UpdateCurrentUserPassword.http = UpdateCurrentUserPassword.http
+		DeleteCurrent.http = DeleteCurrent.http
+		GetByUsername.http = GetByUsername.http
+		GetCurrent.http = GetCurrent.http
+		UpdateCurrent.http = UpdateCurrent.http
+		UpdatePasswordCurrent.http = UpdatePasswordCurrent.http
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admins", "Admins", "{34EA5FD5-34E1-4A40-8523-3A03EFAD3717}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admins", "Admins", "{697FF24F-86D4-45B2-B0A9-B89FC22A6064}"
 	ProjectSection(SolutionItems) = preProject
-		DeleteUserById.http = DeleteUserById.http
-		GetAllUsers.http = GetAllUsers.http
-		GetUser.http = GetUser.http
-		UpdateUserRole.http = UpdateUserRole.http
+		BanById.http = BanById.http
+		DeleteById.http = DeleteById.http
+		GetAll.http = GetAll.http
+		GetById.http = GetById.http
+		UnbanById.http = UnbanById.http
+		UpdateRoleById.http = UpdateRoleById.http
 	EndProjectSection
 EndProject
 Global
@@ -75,9 +77,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8E46A2B0-D733-4E72-8E73-95DAD36F36C7} = {0D0D89D5-166D-4E55-A647-574A426F9E72}
-		{5AF2243A-FD47-4A19-8986-8A59A0B3D55A} = {0D0D89D5-166D-4E55-A647-574A426F9E72}
-		{34EA5FD5-34E1-4A40-8523-3A03EFAD3717} = {0D0D89D5-166D-4E55-A647-574A426F9E72}
+		{7D97B9E8-F5E6-48CA-90C1-360E51FB2A2D} = {0D0D89D5-166D-4E55-A647-574A426F9E72}
+		{8D1BCC95-98C7-44E0-BC67-A409D220F100} = {0D0D89D5-166D-4E55-A647-574A426F9E72}
+		{697FF24F-86D4-45B2-B0A9-B89FC22A6064} = {0D0D89D5-166D-4E55-A647-574A426F9E72}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C44AFB63-4A3D-4974-9C22-6747CF04F73B}

@@ -11,7 +11,8 @@ namespace CloneInstagramAPI.Application.Posts.Queries
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
 
-        public GetAllPostsCurrentUserByIdQueryHandler(IUserRepository userRepository, IPostRepository postRepository)        {
+        public GetAllPostsCurrentUserByIdQueryHandler(IUserRepository userRepository, IPostRepository postRepository)
+        {
             _userRepository = userRepository;
             _postRepository = postRepository;
         }
