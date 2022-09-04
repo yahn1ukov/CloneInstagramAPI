@@ -7,6 +7,10 @@
         string? Description,
         string? Avatar,
         string Username,
+        int CountLike,
+        int CountSave,
+        bool IsLike,
+        bool IsSave,
         DateTimeOffset CreatedAt
     );
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CloneInstagramAPI.Application.Posts.Commands;
+using CloneInstagramAPI.Application.Posts.Common;
 using CloneInstagramAPI.Domain.Entities;
 
 namespace CloneInstagramAPI.Application.Common.Mapper

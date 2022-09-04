@@ -42,7 +42,7 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok
             (
                 result
-                .Select(p => _mapper.Map<AllPostsResponse>(result))
+                .Select(p => new AllPostsResponse(p.Id, p.Content))
                 .ToList()
             );
         }
@@ -72,40 +72,40 @@ namespace CloneInstagramAPI.Api.Controllers
             );
         }
 
-        [HttpPatch("{postId}/like")]
+        [HttpPost("{postId}/like")]
         public async Task<IActionResult> SetLike(Guid postId)
         {
-            var command = new UpdatePostSetLikeUserByIdCommand(postId);
+            var command = new UpdatePostSetLikeCommand(postId);
 
             var result = await _mediator.Send(command);
 
             return Ok(result);
         }
 
-        [HttpPatch("{postId}/unlike")]
+        [HttpDelete("{postId}/unlike")]
         public async Task<IActionResult> UnsetLike(Guid postId)
         {
-            var command = new UpdatePostUnsetLikeUserByIdCommand(postId);
+            var command = new UpdatePostUnsetLikeCommand(postId);
 
             var result = await _mediator.Send(command);
 
             return Ok(result);
         }
 
-        [HttpPatch("{postId}/save")]
+        [HttpPost("{postId}/save")]
         public async Task<IActionResult> SetSave(Guid postId)
         {
-            var command = new UpdatePostSetSaveUserByIdCommand(postId);
+            var command = new UpdatePostSetSaveCommand(postId);
 
             var result = await _mediator.Send(command);
 
             return Ok(result);
         }
 
-        [HttpPatch("{postId}/unsave")]
+        [HttpDelete("{postId}/unsave")]
         public async Task<IActionResult> UnsetSave(Guid postId)
         {
-            var command = new UpdatePostUnsetSaveUserByIdCommand(postId);
+            var command = new UpdatePostUnsetSaveCommand(postId);
 
             var result = await _mediator.Send(command);
 

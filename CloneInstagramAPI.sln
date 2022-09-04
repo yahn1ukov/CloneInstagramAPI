@@ -26,20 +26,26 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{8D1BCC95-98C7-44E0-BC67-A409D220F100}"
 	ProjectSection(SolutionItems) = preProject
 		DeleteCurrent.http = DeleteCurrent.http
-		GetByUsername.http = GetByUsername.http
 		GetCurrent.http = GetCurrent.http
 		UpdateCurrent.http = UpdateCurrent.http
+		GetUserByUsername.http = GetUserByUsername.http
 		UpdatePasswordCurrent.http = UpdatePasswordCurrent.http
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admins", "Admins", "{697FF24F-86D4-45B2-B0A9-B89FC22A6064}"
 	ProjectSection(SolutionItems) = preProject
-		BanById.http = BanById.http
-		DeleteById.http = DeleteById.http
-		GetAll.http = GetAll.http
-		GetById.http = GetById.http
-		UnbanById.http = UnbanById.http
-		UpdateRoleById.http = UpdateRoleById.http
+		BanUserById.http = BanUserById.http
+		DeleteUserById.http = DeleteUserById.http
+		GetAllUsers.http = GetAllUsers.http
+		GetUserById.http = GetUserById.http
+		UpdateRoleUserById.http = UpdateRoleUserById.http
+		UnbanUserById.http = UnbanUserById.http
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Posts", "Posts", "{EED8CC00-1A53-4201-BA62-9280EBB0D2A8}"
+	ProjectSection(SolutionItems) = preProject
+		CreatePost.http = CreatePost.http
+		GetAllPosts.http = GetAllPosts.http
 	EndProjectSection
 EndProject
 Global
@@ -80,6 +86,7 @@ Global
 		{7D97B9E8-F5E6-48CA-90C1-360E51FB2A2D} = {0D0D89D5-166D-4E55-A647-574A426F9E72}
 		{8D1BCC95-98C7-44E0-BC67-A409D220F100} = {0D0D89D5-166D-4E55-A647-574A426F9E72}
 		{697FF24F-86D4-45B2-B0A9-B89FC22A6064} = {0D0D89D5-166D-4E55-A647-574A426F9E72}
+		{EED8CC00-1A53-4201-BA62-9280EBB0D2A8} = {0D0D89D5-166D-4E55-A647-574A426F9E72}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C44AFB63-4A3D-4974-9C22-6747CF04F73B}

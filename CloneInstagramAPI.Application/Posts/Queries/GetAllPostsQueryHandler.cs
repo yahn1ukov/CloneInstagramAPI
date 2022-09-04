@@ -1,4 +1,5 @@
-﻿using CloneInstagramAPI.Application.Persistence;
+﻿using AutoMapper;
+using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Application.Posts.Common;
 using MediatR;
 
@@ -7,10 +8,12 @@ namespace CloneInstagramAPI.Application.Posts.Queries
     public class GetAllPostsQueryHandler : IRequestHandler<GetAllPostsQuery, IEnumerable<AllPostsResult>>
     {
         private readonly IPostRepository _postRepository;
+        private readonly IMapper _mapper;
 
-        public GetAllPostsQueryHandler(IPostRepository postRepository)
+        public GetAllPostsQueryHandler(IPostRepository postRepository, IMapper mapper)
         {
             _postRepository = postRepository;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<AllPostsResult>> Handle(GetAllPostsQuery query, CancellationToken cancellationToken)

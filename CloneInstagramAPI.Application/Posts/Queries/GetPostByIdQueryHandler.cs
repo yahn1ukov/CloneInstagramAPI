@@ -20,21 +20,21 @@ namespace CloneInstagramAPI.Application.Posts.Queries
 
         public async Task<PostResult> Handle(GetPostByIdQuery query, CancellationToken cancellationToken)
         {
-            if (await _postRepository.GetById(query.PostId) is not Post post)
-            {
-                throw new PostNotFoundException();
-            }
-
             if (await _userRepository.GetById() is not User user)
             {
                 throw new UserNotFoundException();
             }
 
-            int countLikes = post.Likes.Count > 0 ? post.Likes.Count : 0;
-            int countSaves = post.Saves.Count > 0 ? post.Saves.Count : 0;
+            if (await _postRepository.GetById(query.PostId) is not Post post)
+            {
+                throw new PostNotFoundException();
+            }
 
-            bool isLike = post.Likes.Contains(user.Id) ? true : false;
-            bool isSave = post.Saves.Contains(user.Id) ? true : false;
+            var isLike = post.Likes.Any(l => l.UserId == user.Id) ? true : false;
+            var countLikes = post.Likes.Count > 0 ? post.Likes.Count : 0;
+            
+            var isSave = post.Saves.Any(s => s.UserId == user.Id) ? true : false;
+            var countSaves = post.Saves.Count > 0 ? post.Saves.Count : 0;
 
             return new PostResult
             (

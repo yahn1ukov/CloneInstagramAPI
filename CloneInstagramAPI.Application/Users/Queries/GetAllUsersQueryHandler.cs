@@ -7,18 +7,18 @@ namespace CloneInstagramAPI.Application.Users.Queries
 {
     public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery, IEnumerable<AllUsersResult>>
     {
-        private readonly IUserRepository _userRpository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public GetAllUsersQueryHandler(IUserRepository userRpository, IMapper mapper)
+        public GetAllUsersQueryHandler(IUserRepository userRepository, IMapper mapper)
         {
-            _userRpository = userRpository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
 
         public async Task<IEnumerable<AllUsersResult>> Handle(GetAllUsersQuery query, CancellationToken cancellationToken)
         {
-            var users = await _userRpository.GetAll();
+            var users = await _userRepository.GetAll();
 
             return users
                 .Select(u => _mapper.Map<AllUsersResult>(u))

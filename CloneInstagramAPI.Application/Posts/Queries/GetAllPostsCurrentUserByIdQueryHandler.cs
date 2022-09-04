@@ -1,4 +1,5 @@
-﻿using CloneInstagramAPI.Application.Common.Exception.Error.User;
+﻿using AutoMapper;
+using CloneInstagramAPI.Application.Common.Exception.Error.User;
 using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Application.Posts.Common;
 using CloneInstagramAPI.Domain.Entities;
@@ -10,11 +11,18 @@ namespace CloneInstagramAPI.Application.Posts.Queries
     {
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
+        private readonly IMapper _mapper;
 
-        public GetAllPostsCurrentUserByIdQueryHandler(IUserRepository userRepository, IPostRepository postRepository)
+        public GetAllPostsCurrentUserByIdQueryHandler
+        (
+            IUserRepository userRepository,
+            IPostRepository postRepository,
+            IMapper mapper
+        )
         {
             _userRepository = userRepository;
             _postRepository = postRepository;
+            _mapper = mapper;
         }
 
 
@@ -28,7 +36,7 @@ namespace CloneInstagramAPI.Application.Posts.Queries
             var posts = await _postRepository.GetAllUsersById(user.Id);
 
             return posts
-                .Select(p => new AllPostsResult(p.Id, p.Content))
+                .Select(p => _mapper.Map<AllPostsResult>(p))
                 .ToList();
         }
     }
