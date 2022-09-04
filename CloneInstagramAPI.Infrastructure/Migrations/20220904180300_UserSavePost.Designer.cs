@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CloneInstagramAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220904144049_UserSavePost")]
+    [Migration("20220904180300_UserSavePost")]
     partial class UserSavePost
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,7 +89,7 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Save");
+                    b.ToTable("Saves");
                 });
 
             modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.User", b =>

@@ -5,6 +5,6 @@ namespace CloneInstagramAPI.Application.Common.Exception.Error.User
     public class UserNewPasswordNotSameConfirmedNewPasswordException : CustomException
     {
         public UserNewPasswordNotSameConfirmedNewPasswordException()
-            : base(400, "Confirmed password isn't like new password.") { }
+            : base(400, "Confirmed password is not like new password.") { }
     }
 }

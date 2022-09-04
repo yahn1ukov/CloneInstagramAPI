@@ -5,6 +5,7 @@
 
 *.http
 Requests/
+.vscode/
 
 # User-specific files
 *.rsuser

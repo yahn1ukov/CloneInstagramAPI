@@ -16,31 +16,36 @@ namespace CloneInstagramAPI.Infrastructure.Data
                 .HasOne<User>(p => p.User)
                 .WithMany(u => u.Posts)
                 .HasForeignKey(p => p.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Like>()
                 .HasOne<User>(l => l.User)
                 .WithMany(u => u.Likes)
                 .HasForeignKey(l => l.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Like>()
                 .HasOne<Post>(l => l.Post)
                 .WithMany(p => p.Likes)
                 .HasForeignKey(l => l.PostId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Save>()
                 .HasOne<User>(s => s.User)
                 .WithMany(u => u.Saves)
                 .HasForeignKey(s => s.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Save>()
                 .HasOne<Post>(s => s.Post)
                 .WithMany(p => p.Saves)
                 .HasForeignKey(s => s.PostId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
         }
 
         public DbSet<User> Users { get; set; }

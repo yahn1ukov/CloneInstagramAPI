@@ -39,9 +39,7 @@ namespace CloneInstagramAPI.Application.Posts.Commands
             Save save = new Save
             {
                 UserId = user.Id,
-                User = user,
-                PostId = post.Id,
-                Post = post
+                PostId = post.Id
             };
 
             await _saveRepository.Set(save);

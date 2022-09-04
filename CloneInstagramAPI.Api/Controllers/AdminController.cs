@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using CloneInstagramAPI.Application.Posts.Queries;
 using CloneInstagramAPI.Application.Users.Commands;
 using CloneInstagramAPI.Application.Users.Queries;
+using CloneInstagramAPI.Contracts.Post;
 using CloneInstagramAPI.Contracts.User;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -23,7 +25,7 @@ namespace CloneInstagramAPI.Api.Controllers
         }
 
         [HttpGet("users")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllUsers()
         {
             var query = new GetAllUsersQuery();
 
@@ -33,6 +35,21 @@ namespace CloneInstagramAPI.Api.Controllers
             (
                 result
                 .Select(u => _mapper.Map<AllUsersResponse>(u))
+                .ToList()
+            );
+        }
+
+        [HttpGet("posts")]
+        public async Task<IActionResult> GetAllPostsWithoutUser()
+        {
+            var query = new GetAllPostsWithoutUserQuery();
+
+            var result = await _mediator.Send(query);
+
+            return Ok
+            (
+                result
+                .Select(p => new AllPostsResponse(p.Id, p.Content))
                 .ToList()
             );
         }

@@ -112,6 +112,7 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "ADMIN, USER")]
         [HttpDelete("{postId}")]
         public async Task<IActionResult> Delete(Guid postId)
         {

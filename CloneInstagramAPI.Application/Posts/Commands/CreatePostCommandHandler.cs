@@ -34,7 +34,6 @@ namespace CloneInstagramAPI.Application.Posts.Commands
             var createdPost = _mapper.Map<Post>(command);
 
             createdPost.UserId = user.Id;
-            createdPost.User = user;
 
             await _postRepository.Create(createdPost);
 

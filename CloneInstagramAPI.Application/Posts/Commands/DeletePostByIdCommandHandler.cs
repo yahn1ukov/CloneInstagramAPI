@@ -1,16 +1,20 @@
 ﻿using CloneInstagramAPI.Application.Common.Exception.Error.Post;
+using CloneInstagramAPI.Application.Common.Exception.Error.User;
 using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Domain.Entities;
+using CloneInstagramAPI.Domain.Enums;
 using MediatR;
 
 namespace CloneInstagramAPI.Application.Posts.Commands
 {
     public class DeletePostByIdCommandHandler : IRequestHandler<DeletePostByIdCommand, bool>
     {
+        private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
 
-        public DeletePostByIdCommandHandler(IPostRepository postRepository)
+        public DeletePostByIdCommandHandler(IUserRepository userRepository, IPostRepository postRepository)
         {
+            _userRepository = userRepository;
             _postRepository = postRepository;
         }
 
@@ -19,6 +23,16 @@ namespace CloneInstagramAPI.Application.Posts.Commands
             if (await _postRepository.GetById(command.PostId) is not Post post)
             {
                 throw new PostNotFoundException();
+            }
+
+            if(await _userRepository.GetById() is not User user)
+            {
+                throw new UserNotFoundException();
+            }
+
+            if(user.Id != post.UserId || user.Role != UserRole.ADMIN)
+            {
+                throw new PostCannotBeDeletedException();
             }
 
             await _postRepository.Delete(post);

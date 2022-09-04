@@ -10,7 +10,7 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Save",
+                name: "Saves",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -19,34 +19,34 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Save", x => x.Id);
+                    table.PrimaryKey("PK_Saves", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Save_Posts_PostId",
+                        name: "FK_Saves_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Save_Users_UserId",
+                        name: "FK_Saves_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Save_PostId",
-                table: "Save",
+                name: "IX_Saves_PostId",
+                table: "Saves",
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Save_UserId",
-                table: "Save",
+                name: "IX_Saves_UserId",
+                table: "Saves",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Save");
+                name: "Saves");
         }
     }
 }

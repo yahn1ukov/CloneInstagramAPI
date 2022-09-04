@@ -30,9 +30,14 @@ namespace CloneInstagramAPI.Application.Posts.Queries
                 throw new PostNotFoundException();
             }
 
+            if (post.UserId is null)
+            {
+                throw new PostNotFoundException();
+            }
+
             var isLike = post.Likes.Any(l => l.UserId == user.Id) ? true : false;
             var countLikes = post.Likes.Count > 0 ? post.Likes.Count : 0;
-            
+
             var isSave = post.Saves.Any(s => s.UserId == user.Id) ? true : false;
             var countSaves = post.Saves.Count > 0 ? post.Saves.Count : 0;
 

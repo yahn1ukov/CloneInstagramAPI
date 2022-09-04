@@ -27,14 +27,21 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
                 .Include(u => u.User)
                 .Include(l => l.Likes)
                 .Include(s => s.Saves)
-                .Where(p => p.Likes.Any(l => l.PostId == postId))
-                .Where(p => p.Saves.Any(l => l.PostId == postId))
                 .SingleOrDefaultAsync(p => p.Id == postId);
         }
 
         public async Task<IEnumerable<Post>> GetAll()
         {
-            return await _context.Posts.ToListAsync();
+            return await _context.Posts
+                .Where(p => p.UserId != null)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Post>> GetAllWithoutUser()
+        {
+            return await _context.Posts
+                .Where(p => p.UserId == null)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Post>> GetAllUsersById(Guid id)

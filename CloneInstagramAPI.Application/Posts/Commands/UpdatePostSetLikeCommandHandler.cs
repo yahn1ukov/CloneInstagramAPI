@@ -39,9 +39,7 @@ namespace CloneInstagramAPI.Application.Posts.Commands
             Like like = new Like
             {
                 UserId = user.Id,
-                User = user,
-                PostId = post.Id,
-                Post = post
+                PostId = post.Id
             };
 
             await _likeRepository.Set(like);
