@@ -1,4 +1,6 @@
-﻿namespace CloneInstagramAPI.Application.Posts.Common
+﻿using CloneInstagramAPI.Domain.Entities;
+
+namespace CloneInstagramAPI.Application.Posts.Common
 {
     public record PostResult
     (
@@ -7,8 +9,10 @@
         string? Description,
         string? Avatar,
         string Username,
-        int CountLike,
-        int CountSave,
+        int CountLikes,
+        int CountSaves,
+        int CountComments,
+        IEnumerable<AllPostCommentsResult> Comments,
         bool IsLike,
         bool IsSave,
         DateTimeOffset CreatedAt

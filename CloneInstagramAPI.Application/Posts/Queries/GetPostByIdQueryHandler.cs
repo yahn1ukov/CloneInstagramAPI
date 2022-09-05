@@ -41,6 +41,11 @@ namespace CloneInstagramAPI.Application.Posts.Queries
             var isSave = post.Saves.Any(s => s.UserId == user.Id) ? true : false;
             var countSaves = post.Saves.Count > 0 ? post.Saves.Count : 0;
 
+            var comments = post.Comments
+                                .Select(c => new AllPostCommentsResult(c.Id, c.Message, c.CreatedAt))
+                                .ToList();
+            var countComments = post.Comments.Count > 0 ? post.Comments.Count : 0;
+
             return new PostResult
             (
                 post.Id,
@@ -50,6 +55,8 @@ namespace CloneInstagramAPI.Application.Posts.Queries
                 post.User.Username,
                 countLikes,
                 countSaves,
+                countComments,
+                comments,
                 isLike,
                 isSave,
                 post.CreatedAt

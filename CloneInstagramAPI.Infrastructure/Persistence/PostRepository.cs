@@ -27,6 +27,7 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
                 .Include(u => u.User)
                 .Include(l => l.Likes)
                 .Include(s => s.Saves)
+                .Include(c => c.Comments)
                 .SingleOrDefaultAsync(p => p.Id == postId);
         }
 
@@ -47,8 +48,7 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
         public async Task<IEnumerable<Post>> GetAllUsersById(Guid id)
         {
             return await _context.Posts
-                .Include(u => u.User)
-                .Where(p => p.User.Id == id)
+                .Where(p => p.UserId == id)
                 .ToListAsync();
         }
 

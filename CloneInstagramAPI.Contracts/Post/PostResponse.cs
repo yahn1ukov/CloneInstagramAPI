@@ -7,8 +7,10 @@
         string? Description,
         string? Avatar,
         string Username,
-        int CountLike,
-        int CountSave,
+        int CountLikes,
+        int CountSaves,
+        int CountComments,
+        IEnumerable<AllPostCommentsResponse> Comments,
         bool IsLike,
         bool IsSave,
         DateTimeOffset CreatedAt

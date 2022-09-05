@@ -9,6 +9,5 @@ namespace CloneInstagramAPI.Application.Persistence
         Task<bool> ExistsByUsername(string username);
         Task<User?> GetById();
         Task<User?> GetByUsername(string username);
-        Task<IEnumerable<User>> GetAll();
     }
 }

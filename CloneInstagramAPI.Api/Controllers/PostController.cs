@@ -2,6 +2,7 @@
 using AutoMapper;
 using CloneInstagramAPI.Application.Posts.Commands;
 using CloneInstagramAPI.Application.Posts.Queries;
+using CloneInstagramAPI.Contracts.Comment;
 using CloneInstagramAPI.Contracts.Post;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -134,5 +135,24 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost("{postId}/comment")]
+        public async Task<IActionResult> AddComment(Guid postId, CreateCommentRequest request)
+        {
+            var command = new UpdatePostAddCommentCommand(postId, request.Message);
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{postId}/uncomment")]
+        public async Task<IActionResult> DeleteComment(Guid postId)
+        {
+            var command = new UpdatePostRemoveCommentCommand(postId);
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
     }
 }
