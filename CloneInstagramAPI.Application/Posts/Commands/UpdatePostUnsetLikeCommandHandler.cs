@@ -10,13 +10,13 @@ namespace CloneInstagramAPI.Application.Posts.Commands
     {
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
-        private readonly ILikeRepository _likeRepository;
+        private readonly IPostActionRepository<Like> _likeRepository;
 
         public UpdatePostUnsetLikeCommandHandler
         (
             IUserRepository userRepository, 
             IPostRepository postRepository,
-            ILikeRepository likeRepository
+            IPostActionRepository<Like> likeRepository
         )
         {
             _userRepository = userRepository;
@@ -38,7 +38,7 @@ namespace CloneInstagramAPI.Application.Posts.Commands
 
             Like like = await _likeRepository.Get(user.Id, post.Id);
 
-            await _likeRepository.Unset(like);
+            await _likeRepository.Remove(like);
 
             return true;
         }

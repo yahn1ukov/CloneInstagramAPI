@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CloneInstagramAPI.Infrastructure.Persistence
 {
-    public class LikeRepository : ILikeRepository
+    public class LikeRepository : IPostActionRepository<Like>
     {
         private readonly ApplicationDbContext _context;
 
@@ -19,14 +19,14 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             return await _context.Likes.SingleAsync(l => l.UserId == userId && l.PostId == postId);
         }
 
-        public async Task Set(Like like)
+        public async Task Add(Like like)
         {
             _context.Likes.Add(like);
 
             await _context.SaveChangesAsync();
         }
 
-        public async Task Unset(Like like)
+        public async Task Remove(Like like)
         {
             _context.Likes.Remove(like);
 

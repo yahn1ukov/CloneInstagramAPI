@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CloneInstagramAPI.Infrastructure.Persistence
 {
-    public class SaveRepository : ISaveRepository
+    public class SaveRepository : IPostActionRepository<Save>
     {
         private readonly ApplicationDbContext _context;
 
@@ -19,14 +19,14 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             return await _context.Saves.SingleAsync(s => s.UserId == userId && s.PostId == postId);
         }
 
-        public async Task Set(Save save)
+        public async Task Add(Save save)
         {
             _context.Saves.Add(save);
 
             await _context.SaveChangesAsync();
         }
 
-        public async Task Unset(Save save)
+        public async Task Remove(Save save)
         {
             _context.Saves.Remove(save);
 

@@ -10,13 +10,13 @@ namespace CloneInstagramAPI.Application.Posts.Commands
     {
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
-        private readonly ISaveRepository _saveRepository;
+        private readonly IPostActionRepository<Save> _saveRepository;
 
         public UpdatePostSetSaveCommandHandler
         (
             IUserRepository userRepository, 
             IPostRepository postRepository,
-            ISaveRepository saveRepository
+            IPostActionRepository<Save> saveRepository
         )
         {
             _userRepository = userRepository;
@@ -42,7 +42,7 @@ namespace CloneInstagramAPI.Application.Posts.Commands
                 PostId = post.Id
             };
 
-            await _saveRepository.Set(save);
+            await _saveRepository.Add(save);
 
             return true;
         }

@@ -6,25 +6,18 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Posts.Commands
 {
-    public class UpdatePostUnsetSaveCommandHandler : IRequestHandler<UpdatePostUnsetSaveCommand, bool>
+    public class UpdatePostDescriptionCommandHandler : IRequestHandler<UpdatePostDescriptionCommand, bool>
     {
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
-        private readonly IPostActionRepository<Save> _saveRepository;
 
-        public UpdatePostUnsetSaveCommandHandler
-        (
-            IUserRepository userRepository, 
-            IPostRepository postRepository,
-            IPostActionRepository<Save> saveRepository
-        )
+        public UpdatePostDescriptionCommandHandler(IUserRepository userRepository, IPostRepository postRepository)
         {
             _userRepository = userRepository;
             _postRepository = postRepository;
-            _saveRepository = saveRepository;
         }
 
-        public async Task<bool> Handle(UpdatePostUnsetSaveCommand command, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdatePostDescriptionCommand command, CancellationToken cancellationToken)
         {
             if(await _userRepository.GetById() is not User user)
             {
@@ -36,9 +29,14 @@ namespace CloneInstagramAPI.Application.Posts.Commands
                 throw new PostNotFoundException();
             }
 
-            Save save = await _saveRepository.Get(user.Id, post.Id);
+            if(user.Id != post.UserId)
+            {
+                throw new PostCannotBeChangedException();
+            }
 
-            await _saveRepository.Remove(save);
+            post.Description = command.Description;
+
+            await _postRepository.Update(post);
 
             return true;
         }

@@ -21,6 +21,7 @@ namespace CloneInstagramAPI.Domain.Entities
         public List<Post> Posts { get; set; }
         public List<Like> Likes { get; set; }
         public List<Save> Saves { get; set; }
+        public List<Comment> Comments { get; set; }
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
     }
 }

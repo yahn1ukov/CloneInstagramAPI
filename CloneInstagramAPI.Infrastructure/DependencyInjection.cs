@@ -1,6 +1,7 @@
 ﻿using CloneInstagramAPI.Application.Common.Interfaces.Authentication;
 using CloneInstagramAPI.Application.Common.Interfaces.Services;
 using CloneInstagramAPI.Application.Persistence;
+using CloneInstagramAPI.Domain.Entities;
 using CloneInstagramAPI.Infrastructure.Common.Authentication;
 using CloneInstagramAPI.Infrastructure.Data;
 using CloneInstagramAPI.Infrastructure.Persistence;
@@ -42,8 +43,8 @@ namespace CloneInstagramAPI.Infrastructure
             
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
-            services.AddScoped<ILikeRepository, LikeRepository>();
-            services.AddScoped<ISaveRepository, SaveRepository>();
+            services.AddScoped<IPostActionRepository<Like>, LikeRepository>();
+            services.AddScoped<IPostActionRepository<Save>, SaveRepository>();
 
             return services;
         }

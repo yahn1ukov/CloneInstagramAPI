@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using CloneInstagramAPI.Application.Posts.Commands;
 using CloneInstagramAPI.Application.Posts.Queries;
 using CloneInstagramAPI.Contracts.Post;
@@ -72,6 +73,27 @@ namespace CloneInstagramAPI.Api.Controllers
             );
         }
 
+        [HttpPatch("{postId}")]
+        public async Task<IActionResult> Update(Guid postId, UpdateDescriptionRequest request)
+        {
+            var command = new UpdatePostDescriptionCommand(postId, request.Description);
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "ADMIN, USER")]
+        [HttpDelete("{postId}")]
+        public async Task<IActionResult> Delete(Guid postId)
+        {
+            var command = new DeletePostByIdCommand(postId);
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
         [HttpPost("{postId}/like")]
         public async Task<IActionResult> SetLike(Guid postId)
         {
@@ -112,15 +134,5 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "ADMIN, USER")]
-        [HttpDelete("{postId}")]
-        public async Task<IActionResult> Delete(Guid postId)
-        {
-            var command = new DeletePostByIdCommand(postId);
-
-            var result = await _mediator.Send(command);
-
-            return Ok(result);
-        }
     }
 }
