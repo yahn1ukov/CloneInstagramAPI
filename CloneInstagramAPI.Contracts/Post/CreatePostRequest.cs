@@ -4,6 +4,5 @@
     (
         string Content,
         string? Description
-
     );
 }

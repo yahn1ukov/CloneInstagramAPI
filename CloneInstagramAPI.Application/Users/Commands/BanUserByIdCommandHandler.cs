@@ -9,7 +9,10 @@ namespace CloneInstagramAPI.Application.Users.Commands
     {
         private readonly IUserRepository _userRepository;
 
-        public BanUserByIdCommandHandler(IUserRepository userRepository)
+        public BanUserByIdCommandHandler
+        (
+            IUserRepository userRepository
+        )
         {
             _userRepository = userRepository;
         }

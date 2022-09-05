@@ -1,0 +1,18 @@
+﻿namespace CloneInstagramAPI.Contracts.Post
+{
+    public record GetPostResponse
+    (
+        Guid Id,
+        string Content,
+        string? Description,
+        string? Avatar,
+        string Username,
+        int CountLikes,
+        int CountSaves,
+        int CountComments,
+        IEnumerable<GetAllCommentsResponse> Comments,
+        bool IsLike,
+        bool IsSave,
+        DateTimeOffset CreatedAt
+    );
+}

@@ -13,7 +13,11 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserRepository(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+        public UserRepository
+        (
+            ApplicationDbContext context,
+            IHttpContextAccessor httpContextAccessor
+        )
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
@@ -61,9 +65,9 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             return await _context.Users.SingleOrDefaultAsync(u => u.Id == GetUserId());
         }
 
-        public async Task<User?> GetById(Guid id)
+        public async Task<User?> GetById(Guid userId)
         {
-            return await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+            return await _context.Users.SingleOrDefaultAsync(u => u.Id == userId);
         }
 
         public async Task<User?> GetByUsername(string username)

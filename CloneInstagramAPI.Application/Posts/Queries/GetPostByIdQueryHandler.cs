@@ -1,4 +1,5 @@
-﻿using CloneInstagramAPI.Application.Common.Exception.Error.Post;
+﻿using AutoMapper;
+using CloneInstagramAPI.Application.Common.Exception.Error.Post;
 using CloneInstagramAPI.Application.Common.Exception.Error.User;
 using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Application.Posts.Common;
@@ -7,18 +8,25 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Posts.Queries
 {
-    public class GetPostByIdQueryHandler : IRequestHandler<GetPostByIdQuery, PostResult>
+    public class GetPostByIdQueryHandler : IRequestHandler<GetPostByIdQuery, GetPostResult>
     {
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
+        private readonly IMapper _mapper;
 
-        public GetPostByIdQueryHandler(IUserRepository userRepository, IPostRepository postRepository)
+        public GetPostByIdQueryHandler
+        (
+            IUserRepository userRepository,
+            IPostRepository postRepository, 
+            IMapper mapper
+        )
         {
             _userRepository = userRepository;
             _postRepository = postRepository;
+            _mapper = mapper;
         }
 
-        public async Task<PostResult> Handle(GetPostByIdQuery query, CancellationToken cancellationToken)
+        public async Task<GetPostResult> Handle(GetPostByIdQuery query, CancellationToken cancellationToken)
         {
             if (await _userRepository.GetById() is not User user)
             {
@@ -42,25 +50,11 @@ namespace CloneInstagramAPI.Application.Posts.Queries
             var countSaves = post.Saves.Count > 0 ? post.Saves.Count : 0;
 
             var comments = post.Comments
-                                .Select(c => new AllPostCommentsResult(c.Id, c.Message, c.CreatedAt))
+                                .Select(c => _mapper.Map<GetAllCommentsResult>(c))
                                 .ToList();
-            var countComments = post.Comments.Count > 0 ? post.Comments.Count : 0;
+            int countComments = post.Comments.Count > 0 ? post.Comments.Count : 0;
 
-            return new PostResult
-            (
-                post.Id,
-                post.Content,
-                post.Description,
-                post.User.Avatar,
-                post.User.Username,
-                countLikes,
-                countSaves,
-                countComments,
-                comments,
-                isLike,
-                isSave,
-                post.CreatedAt
-            );
+            return _mapper.Map<GetPostResult>(post);
         }
     }
 }

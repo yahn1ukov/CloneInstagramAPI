@@ -1,4 +1,7 @@
 ﻿namespace CloneInstagramAPI.Contracts.User
 {
-    public record UpdateUserRoleRequest(int NewRole);
+    public record UpdateUserRoleRequest
+    (
+        int NewRole
+    );
 }

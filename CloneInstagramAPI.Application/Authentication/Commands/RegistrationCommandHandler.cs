@@ -1,4 +1,5 @@
-﻿using CloneInstagramAPI.Application.Common.Exception.Error.User;
+﻿using AutoMapper;
+using CloneInstagramAPI.Application.Common.Exception.Error.User;
 using CloneInstagramAPI.Application.Common.Interfaces.Authentication;
 using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Domain.Entities;
@@ -11,13 +12,18 @@ namespace CloneInstagramAPI.Application.Authentication.Commands
     {
         private readonly IPasswordHashGenerator _passwordHashGenerator;
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public RegistrationCommandHandler(
+        public RegistrationCommandHandler
+        (
             IPasswordHashGenerator passwordHashGenerator,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            IMapper mapper
+        )
         {
             _passwordHashGenerator = passwordHashGenerator;
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         public async Task<bool> Handle(RegistrationCommand command, CancellationToken cancellationToken)
@@ -32,16 +38,12 @@ namespace CloneInstagramAPI.Application.Authentication.Commands
                 throw new UserSameUsernameAlreadyExistsException();
             }
 
-            _passwordHashGenerator.GeneratePasswordHash(command.Password, out byte[] passwordHash, out byte[] passwortSalt);
+            _passwordHashGenerator.GeneratePasswordHash(command.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            var user = new User
-            {
-                Email = command.Email,
-                FullName = command.FullName,
-                Username = command.Username,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwortSalt
-            };
+            var user = _mapper.Map<User>(command);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
 
             if (!(await _userRepository.ExistsAdmin()))
             {

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CloneInstagramAPI.Contracts.User
+﻿namespace CloneInstagramAPI.Contracts.User
 {
     public record UpdateUserPasswordRequest
     (

@@ -2,5 +2,8 @@
 
 namespace CloneInstagramAPI.Application.Users.Commands
 {
-    public record DeleteUserByIdCommand(Guid UserId) : IRequest<bool>;
+    public record DeleteUserByIdCommand
+    (
+        Guid UserId
+    ) : IRequest<bool>;
 }

@@ -1,6 +1,6 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using CloneInstagramAPI.Application.Posts.Commands;
+using CloneInstagramAPI.Application.Posts.Common;
 using CloneInstagramAPI.Application.Posts.Queries;
 using CloneInstagramAPI.Contracts.Comment;
 using CloneInstagramAPI.Contracts.Post;
@@ -18,24 +18,28 @@ namespace CloneInstagramAPI.Api.Controllers
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public PostController(IMediator mediator, IMapper mapper)
+        public PostController
+        (
+            IMediator mediator,
+            IMapper mapper
+        )
         { 
             _mediator = mediator;
             _mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreatePostRequest request)
+        public async Task<IActionResult> CreatePost(CreatePostRequest request)
         {
             var command = _mapper.Map<CreatePostCommand>(request);
 
             var result = await _mediator.Send(command);
 
-            return Created(nameof(Create), result);
+            return Created(nameof(CreatePost), result);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllPosts()
         {
             var query = new GetAllPostsQuery();
 
@@ -44,40 +48,44 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok
             (
                 result
-                .Select(p => new AllPostsResponse(p.Id, p.Content))
+                .Select(p => _mapper.Map<GetAllPostsResponse>(p))
                 .ToList()
             );
         }
 
         [HttpGet("{postId}")]
-        public async Task<IActionResult> Get(Guid postId)
+        public async Task<IActionResult> GetPostById(Guid postId)
         {
             var query = new GetPostByIdQuery(postId);
 
             var result = await _mediator.Send(query);
 
-            return Ok(_mapper.Map<PostResponse>(result));
+            var comments = result.Comments
+                            .Select(c => _mapper.Map<GetAllCommentsResponse>(c))
+                            .ToList();
+
+            return Ok(_mapper.Map<GetPostResponse>(result));
         }
 
-        [HttpGet("users")]
-        public async Task<IActionResult> GetAllUsers()
+        [HttpGet("users/{username}")]
+        public async Task<IActionResult> GetAllPostsByUsername(string username)
         {
-            var query = new GetAllPostsCurrentUserByIdQuery();
+            var query = new GetAllPostsByUsernameQuery(username);
 
             var result = await _mediator.Send(query);
 
             return Ok
             (
                  result
-                .Select(p => _mapper.Map<AllPostsResponse>(result))
+                .Select(p => _mapper.Map<GetAllPostsResponse>(result))
                 .ToList()   
             );
         }
 
         [HttpPatch("{postId}")]
-        public async Task<IActionResult> Update(Guid postId, UpdateDescriptionRequest request)
+        public async Task<IActionResult> UpdatePostById(Guid postId, UpdatePostRequest request)
         {
-            var command = new UpdatePostDescriptionCommand(postId, request.Description);
+            var command = new UpdatePostByIdCommand(postId, request.Description);
 
             var result = await _mediator.Send(command);
 
@@ -86,7 +94,7 @@ namespace CloneInstagramAPI.Api.Controllers
 
         [Authorize(Roles = "ADMIN, USER")]
         [HttpDelete("{postId}")]
-        public async Task<IActionResult> Delete(Guid postId)
+        public async Task<IActionResult> DeletePostById(Guid postId)
         {
             var command = new DeletePostByIdCommand(postId);
 
@@ -96,9 +104,9 @@ namespace CloneInstagramAPI.Api.Controllers
         }
 
         [HttpPost("{postId}/like")]
-        public async Task<IActionResult> SetLike(Guid postId)
+        public async Task<IActionResult> UpdatePostSetLikeById(Guid postId)
         {
-            var command = new UpdatePostSetLikeCommand(postId);
+            var command = new UpdatePostSetLikeByIdCommand(postId);
 
             var result = await _mediator.Send(command);
 
@@ -106,9 +114,9 @@ namespace CloneInstagramAPI.Api.Controllers
         }
 
         [HttpDelete("{postId}/unlike")]
-        public async Task<IActionResult> UnsetLike(Guid postId)
+        public async Task<IActionResult> UpdatePostUnsetLikeById(Guid postId)
         {
-            var command = new UpdatePostUnsetLikeCommand(postId);
+            var command = new UpdatePostUnsetLikeByIdCommand(postId);
 
             var result = await _mediator.Send(command);
 
@@ -116,39 +124,39 @@ namespace CloneInstagramAPI.Api.Controllers
         }
 
         [HttpPost("{postId}/save")]
-        public async Task<IActionResult> SetSave(Guid postId)
+        public async Task<IActionResult> UpdatePostSetSaveById(Guid postId)
         {
-            var command = new UpdatePostSetSaveCommand(postId);
+            var command = new UpdatePostSetSaveByIdCommand(postId);
 
-            var result = await _mediator.Send(command);
+            bool result = await _mediator.Send(command);
 
             return Ok(result);
         }
 
         [HttpDelete("{postId}/unsave")]
-        public async Task<IActionResult> UnsetSave(Guid postId)
+        public async Task<IActionResult> UpdatePostUnsetSaveById(Guid postId)
         {
-            var command = new UpdatePostUnsetSaveCommand(postId);
+            var command = new UpdatePostUnsetSaveByIdCommand(postId);
 
-            var result = await _mediator.Send(command);
+            bool result = await _mediator.Send(command);
 
             return Ok(result);
         }
 
         [HttpPost("{postId}/comment")]
-        public async Task<IActionResult> AddComment(Guid postId, CreateCommentRequest request)
+        public async Task<IActionResult> UpdatePostAddCommentById(Guid postId, AddCommentRequest request)
         {
-            var command = new UpdatePostAddCommentCommand(postId, request.Message);
+            var command = new UpdatePostAddCommentByIdCommand(postId, request.Message);
 
             var result = await _mediator.Send(command);
 
             return Ok(result);
         }
 
-        [HttpDelete("{postId}/uncomment")]
-        public async Task<IActionResult> DeleteComment(Guid postId)
+        [HttpDelete("{commentId}/uncomment")]
+        public async Task<IActionResult> UpdatePostDeleteCommentById(Guid commentId)
         {
-            var command = new UpdatePostRemoveCommentCommand(postId);
+            var command = new UpdatePostDeleteCommentByIdCommand(commentId);
 
             var result = await _mediator.Send(command);
 

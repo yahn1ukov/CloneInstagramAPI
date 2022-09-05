@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CloneInstagramAPI.Application.Authentication.Commands;
+using CloneInstagramAPI.Application.Authentication.Common;
 using CloneInstagramAPI.Application.Authentication.Queries;
 using CloneInstagramAPI.Contracts.Authentication;
 using MediatR;
@@ -14,7 +15,11 @@ namespace CloneInstagramAPI.Api.Controllers
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public AuthenticationController(IMediator mediator, IMapper mapper)
+        public AuthenticationController
+        (
+            IMediator mediator,
+            IMapper mapper
+        )
         {
             _mediator = mediator;
             _mapper = mapper;

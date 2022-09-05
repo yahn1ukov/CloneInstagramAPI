@@ -6,14 +6,14 @@ using CloneInstagramAPI.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services
-        .AddPresentention(builder.Configuration)
+        .AddPresentation(builder.Configuration)
         .AddApplication()
         .AddInfrastructure(builder.Configuration);
 }
 
 var app = builder.Build();
 {
-    app.UseMiddleware<ErrorHandlingMiddlware>();
+    app.UseMiddleware<ErrorHandlingMiddleware>();
     app.UseHttpsRedirection();
     app.UseAuthentication();
     app.UseAuthorization();

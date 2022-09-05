@@ -9,7 +9,10 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
     {
         private readonly ApplicationDbContext _context;
 
-        public SaveRepository(ApplicationDbContext context)
+        public SaveRepository
+        (
+            ApplicationDbContext context
+        )
         {
             _context = context;
         }

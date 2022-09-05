@@ -18,7 +18,11 @@ namespace CloneInstagramAPI.Api.Controllers
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public AdminController(IMediator mediator, IMapper mapper)
+        public AdminController
+        (
+            IMediator mediator,
+            IMapper mapper
+        )
         {
             _mediator = mediator;
             _mapper = mapper;
@@ -34,40 +38,40 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok
             (
                 result
-                .Select(u => _mapper.Map<AllUsersResponse>(u))
+                .Select(u => _mapper.Map<GetAllUsersResponse>(u))
                 .ToList()
             );
         }
 
         [HttpGet("posts")]
-        public async Task<IActionResult> GetAllPostsWithoutUser()
+        public async Task<IActionResult> GetAllPostsWithoutUsers()
         {
-            var query = new GetAllPostsWithoutUserQuery();
+            var query = new GetAllPostsWithoutUsersQuery();
 
             var result = await _mediator.Send(query);
 
             return Ok
             (
                 result
-                .Select(p => new AllPostsResponse(p.Id, p.Content))
+                .Select(p => _mapper.Map<GetAllPostsResponse>(p))
                 .ToList()
             );
         }
 
         [HttpGet("users/{userId}")]
-        public async Task<IActionResult> GetByUserName(Guid userId)
+        public async Task<IActionResult> GetUserById(Guid userId)
         {
             var query = new GetUserByIdQuery(userId);
 
             var result = await _mediator.Send(query);
 
-            return Ok(_mapper.Map<ProfileResponse>(result));
+            return Ok(_mapper.Map<GetUserResponse>(result));
         }
 
         [HttpPatch("users/{userId}")]
-        public async Task<IActionResult> UpdateRole(Guid userId, UpdateUserRoleRequest request)
+        public async Task<IActionResult> UpdateUserRoleById(Guid userId, UpdateUserRoleRequest request)
         {
-            var command = new UpdateUserRoleCommand(userId, request.NewRole);
+            var command = new UpdateUserRoleByIdCommand(userId, request.NewRole);
 
             var result = await _mediator.Send(command);
 
@@ -75,7 +79,7 @@ namespace CloneInstagramAPI.Api.Controllers
         }
 
         [HttpPatch("users/{userId}/ban")]
-        public async Task<IActionResult> Ban(Guid userId)
+        public async Task<IActionResult> BanUserById(Guid userId)
         { 
             var command = new BanUserByIdCommand(userId);
 
@@ -85,7 +89,7 @@ namespace CloneInstagramAPI.Api.Controllers
         }
 
         [HttpPatch("users/{userId}/unban")]
-        public async Task<IActionResult> UnBan(Guid userId)
+        public async Task<IActionResult> UnbanUserById(Guid userId)
         {
             var command = new UnbanUserByIdCommand(userId);
 
@@ -94,9 +98,8 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok(result);
         }
 
-
         [HttpDelete("users/{userId}")]
-        public async Task<IActionResult> Delete(Guid userId)
+        public async Task<IActionResult> DeleteUserById(Guid userId)
         {
             var command = new DeleteUserByIdCommand(userId);
 

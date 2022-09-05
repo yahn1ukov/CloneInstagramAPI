@@ -9,7 +9,10 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
     {
         private readonly ApplicationDbContext _context;
 
-        public PostRepository(ApplicationDbContext context)
+        public PostRepository
+        (
+            ApplicationDbContext context
+        )
         {
             _context = context;
         }
@@ -38,17 +41,17 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Post>> GetAllWithoutUser()
+        public async Task<IEnumerable<Post>> GetAllWithoutUsers()
         {
             return await _context.Posts
                 .Where(p => p.UserId == null)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Post>> GetAllUsersById(Guid id)
+        public async Task<IEnumerable<Post>> GetAllUsersById(Guid userId)
         {
             return await _context.Posts
-                .Where(p => p.UserId == id)
+                .Where(p => p.UserId == userId)
                 .ToListAsync();
         }
 

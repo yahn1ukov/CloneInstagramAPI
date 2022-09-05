@@ -12,7 +12,11 @@ namespace CloneInstagramAPI.Application.Posts.Commands
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
 
-        public DeletePostByIdCommandHandler(IUserRepository userRepository, IPostRepository postRepository)
+        public DeletePostByIdCommandHandler
+        (
+            IUserRepository userRepository, 
+            IPostRepository postRepository
+        )
         {
             _userRepository = userRepository;
             _postRepository = postRepository;
@@ -20,19 +24,14 @@ namespace CloneInstagramAPI.Application.Posts.Commands
 
         public async Task<bool> Handle(DeletePostByIdCommand command, CancellationToken cancellationToken)
         {
-            if (await _postRepository.GetById(command.PostId) is not Post post)
-            {
-                throw new PostNotFoundException();
-            }
-
             if(await _userRepository.GetById() is not User user)
             {
                 throw new UserNotFoundException();
             }
 
-            if(user.Id != post.UserId || user.Role != UserRole.ADMIN)
+            if (await _postRepository.GetById(command.PostId) is not Post post)
             {
-                throw new PostCannotBeDeletedException();
+                throw new PostNotFoundException();
             }
 
             await _postRepository.Delete(post);

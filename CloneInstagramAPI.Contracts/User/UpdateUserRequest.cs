@@ -2,12 +2,12 @@
 {
     public record UpdateUserRequest
     (
-        string? Avavtar,
-        string FullName,
-        string Username,
+        string? Avatar,
+        string? FullName,
+        string? Username,
         string? WebSite,
         string? Biography,
-        string Email,
+        string? Email,
         string? PhoneNumber,
         int? Gender
     );

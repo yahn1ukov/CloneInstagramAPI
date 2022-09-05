@@ -14,7 +14,11 @@ namespace CloneInstagramAPI.Infrastructure.Common.Authentication
         private readonly JwtTokenSettings _jwtTokenSettings;
         private readonly IDateTimeProvider _dateTimeProvider;
 
-        public JwtTokenGenerator(IOptions<JwtTokenSettings> jwtTokenSettings, IDateTimeProvider dateTimeProvider)
+        public JwtTokenGenerator
+        (
+            IOptions<JwtTokenSettings> jwtTokenSettings,
+            IDateTimeProvider dateTimeProvider
+        )
         {
             _jwtTokenSettings = jwtTokenSettings.Value;
             _dateTimeProvider = dateTimeProvider;
@@ -22,19 +26,19 @@ namespace CloneInstagramAPI.Infrastructure.Common.Authentication
 
         public string GeneratorToken(User user)
         {
-            var claims = new[]
+            Claim[] claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Role, user.Role.ToString())
             };
 
-            var secretKey = Encoding.UTF8.GetBytes(_jwtTokenSettings.Secret);
+            byte[] secretKey = Encoding.UTF8.GetBytes(_jwtTokenSettings.Secret);
 
-            var symmetricSecurityKey = new SymmetricSecurityKey(secretKey);
+            SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(secretKey);
 
-            var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
+            SigningCredentials signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken
+            JwtSecurityToken token = new JwtSecurityToken
             (
                 issuer: _jwtTokenSettings.Issuer,
                 audience: _jwtTokenSettings.Audience,
@@ -43,7 +47,7 @@ namespace CloneInstagramAPI.Infrastructure.Common.Authentication
                 claims: claims
             );
 
-            var tokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
 
             return tokenHandler.WriteToken(token);
         }
