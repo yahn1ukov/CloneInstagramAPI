@@ -60,7 +60,7 @@
 ### :heavy_check_mark: Like
 
 | Name | Type | Primary Key | Foreign Key | Null | Not Null | Unique | Default Value |
-| - | - | - | - | - | - | - | - | - |
+| - | - | - | - | - | - | - | - |
 | ```Id``` | ```Guid``` | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: | :heavy_check_mark: | ```NewGuid``` |
 | ```UserId``` | ```Guid``` | :x: | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: |  |
 | ```PostId``` | ```Guid``` | :x: | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: |  |
