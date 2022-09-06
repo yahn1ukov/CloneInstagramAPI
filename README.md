@@ -1,34 +1,22 @@
 # Clone Instagram API :camera:
----
 ## Software Architecture
 - [Clean Architecture](https://www.c-sharpcorner.com/article/introduction-to-clean-architecture-and-implementation-with-asp-net-core/#:~:text=Clean%20Architecture%20is%20a%20software,written%20without%20any%20direct%20dependencies.)
 ## Technologies
 - [C#](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10)
-   - Collections;
-   - Classes;
-   - Interfaces;
-   - Async/Await;
-   - LINQ.
 - [ASP.NET Web API](https://docs.microsoft.com/en-us/aspnet/web-api/) 
-  - Dependency Injection;
-  - Configuration;
-  - Middleware;
-  - Custom Exception;
-  - Authorization/Authentication.
 - [Entity Framework](https://docs.microsoft.com/en-us/ef/ef6/)
 - [Fluent API](https://www.entityframeworktutorial.net/efcore/fluent-api-in-entity-framework-core.aspx)
 - [AutoMapper](https://docs.automapper.org/en/stable/Getting-started.html)
 - [MediatR](https://github.com/jbogard/MediatR)
 ## Database
 - [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/?view=sql-server-ver16)
----
 ## Enums
 |Name|Values|
 |-|-|
 |```UserRole```|```ADMIN```<br/>```USER```|
 |```UserGender```|```MALE```<br/>```FEMALE```|
 ## Entities
-:heavy_check_mark: **User**
+### User
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value| 
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
@@ -46,7 +34,7 @@
 |```IsBanned```|```boolean```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```false```|
 |```IsDeactivated```|```boolean```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```false```|
 |```CreatedAt```|```DateTimeOffset```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```UtcNow```|
-:heavy_check_mark: **Post**
+### Post
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
@@ -54,19 +42,19 @@
 |```Description```|```string```|:x:|:x:|:heavy_check_mark:|:x:|:x:||
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```CreatedAt```|```DateTimeOffset```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```UtcNow```|
-:heavy_check_mark: **Like**
+### Like
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```PostId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
-:heavy_check_mark: **Save**
+### Save
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```PostId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
-:heavy_check_mark: **Comment**
+### Comment
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
@@ -74,19 +62,19 @@
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```PostId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```CreatedAt```|```DateTimeOffset```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```UtcNow```|
-:x: **Follower**
+### Follower
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```FollowingUserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
-:x: **Room**
+### Room
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```PenPalUserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
-:x: **Message**
+### Message
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
