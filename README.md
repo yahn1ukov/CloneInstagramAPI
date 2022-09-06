@@ -11,14 +11,14 @@
 ## Database
 - [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/?view=sql-server-ver16)
 ## Enums
-|Name|Values|
-|-|-|
-|```UserRole```|```ADMIN```<br/>```USER```|
-|```UserGender```|```MALE```<br/>```FEMALE```|
+| Name | Values |
+| - | - |
+| ```UserRole``` | ```ADMIN```<br/>```USER``` |
+| ```UserGender``` | ```MALE```<br/>```FEMALE``` |
 ## Entities
-### User
-|Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value| 
-|-|-|-|-|-|-|-|-|-|
+### :heavy_check_mark: User
+| Name | Type | Primary Key | Foreign Key | Null | Not Null | Unique | Default Value | 
+| - | - | - | - | - | - | - | - | - |
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
 |```Email```|```string```|:x:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:||
 |```FullName```|```string```|:x:|:x:|:x:|:heavy_check_mark:|:x:||
@@ -34,7 +34,7 @@
 |```IsBanned```|```boolean```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```false```|
 |```IsDeactivated```|```boolean```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```false```|
 |```CreatedAt```|```DateTimeOffset```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```UtcNow```|
-### Post
+### :heavy_check_mark: Post
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
@@ -42,19 +42,19 @@
 |```Description```|```string```|:x:|:x:|:heavy_check_mark:|:x:|:x:||
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```CreatedAt```|```DateTimeOffset```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```UtcNow```|
-### Like
+### :heavy_check_mark: Like
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```PostId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
-### Save
+### :heavy_check_mark: Save
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```PostId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
-### Comment
+### :heavy_check_mark: Comment
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
@@ -62,19 +62,19 @@
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```PostId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```CreatedAt```|```DateTimeOffset```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```UtcNow```|
-### Follower
+### :x: Follower
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```FollowingUserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
-### Room
+### :x: Room
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```PenPalUserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
-### Message
+### :x: Message
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
 |```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
