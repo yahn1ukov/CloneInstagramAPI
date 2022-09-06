@@ -1,4 +1,5 @@
-﻿using CloneInstagramAPI.Application.Persistence;
+﻿using System.Linq;
+using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Domain.Entities;
 using CloneInstagramAPI.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -48,10 +49,24 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Post>> GetAllUsersById(Guid userId)
+        public async Task<IEnumerable<Post>> GetAllUserById(Guid userId)
         {
             return await _context.Posts
                 .Where(p => p.UserId == userId)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Post>> GetAllLikesUserById(Guid userId)
+        {
+            return await _context.Posts
+                .Where(p => p.Likes.Any(l => l.UserId == userId))
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Post>> GetAllSavesUserById(Guid userId)
+        {
+            return await _context.Posts
+                .Where(p => p.Saves.Any(s => s.UserId == userId))
                 .ToListAsync();
         }
 

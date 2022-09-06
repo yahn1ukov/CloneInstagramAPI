@@ -10,6 +10,8 @@ namespace CloneInstagramAPI.Application.Common.Mapper
         public PostMappingProfile()
         {
             CreateMap<CreatePostCommand, Post>();
+            CreateMap<Post, GetAllPostsResult>();
+            CreateMap<UpdatePostAddCommentByIdCommand, Comment>();
         }
     }
 }

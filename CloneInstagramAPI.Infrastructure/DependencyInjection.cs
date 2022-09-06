@@ -37,15 +37,15 @@ namespace CloneInstagramAPI.Infrastructure
                 };
             });
 
-            services.AddScoped<IJwtTokenGenerator,  JwtTokenGenerator>();
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<IPasswordHashGenerator, PasswordHashGenerator>();
             services.AddScoped<IDateTimeProvider, DateTimeProvider>();
-            
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IPostActionRepository<Like>, LikeRepository>();
             services.AddScoped<IPostActionRepository<Save>, SaveRepository>();
-            services.AddScoped<IPostActionRepository<Comment>, CommentRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
             return services;
         }

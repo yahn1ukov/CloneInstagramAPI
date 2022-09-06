@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CloneInstagramAPI.Application.Posts.Commands;
 using CloneInstagramAPI.Application.Posts.Queries;
 using CloneInstagramAPI.Application.Users.Commands;
 using CloneInstagramAPI.Application.Users.Queries;
@@ -79,9 +80,9 @@ namespace CloneInstagramAPI.Api.Controllers
         }
 
         [HttpPatch("users/{userId}/ban")]
-        public async Task<IActionResult> BanUserById(Guid userId)
+        public async Task<IActionResult> UpdateUserBanById(Guid userId)
         { 
-            var command = new BanUserByIdCommand(userId);
+            var command = new UpdateUserBanByIdCommand(userId);
 
             var result = await _mediator.Send(command);
 
@@ -89,9 +90,9 @@ namespace CloneInstagramAPI.Api.Controllers
         }
 
         [HttpPatch("users/{userId}/unban")]
-        public async Task<IActionResult> UnbanUserById(Guid userId)
+        public async Task<IActionResult> UpdateUserUnbanById(Guid userId)
         {
-            var command = new UnbanUserByIdCommand(userId);
+            var command = new UpdateUserUnbanByIdCommand(userId);
 
             var result = await _mediator.Send(command);
 
@@ -102,6 +103,16 @@ namespace CloneInstagramAPI.Api.Controllers
         public async Task<IActionResult> DeleteUserById(Guid userId)
         {
             var command = new DeleteUserByIdCommand(userId);
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+         [HttpDelete("posts/{postId}")]
+        public async Task<IActionResult> DeletePostById(Guid postId)
+        {
+            var command = new DeletePostByIdCommand(postId);
 
             var result = await _mediator.Send(command);
 

@@ -36,6 +36,11 @@ namespace CloneInstagramAPI.Application.Posts.Commands
                 throw new PostNotFoundException();
             }
 
+            if(await _saveRepository.Get(user.Id, post.Id) is not null)
+            {
+                throw new PostSaveAlreadyExistsException();
+            }
+
             var save = new Save
             {
                 UserId = user.Id,

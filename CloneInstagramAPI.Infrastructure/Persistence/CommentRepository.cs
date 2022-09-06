@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CloneInstagramAPI.Infrastructure.Persistence
 {
-    public class CommentRepository : IPostActionRepository<Comment>
+    public class CommentRepository : ICommentRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -17,9 +17,14 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             _context = context;
         }
 
-        public async Task<Comment> Get(Guid userId, Guid postId)
+        public async Task<Comment?> Get(Guid commentId)
         {
-            return await _context.Comments.SingleAsync(c => c.UserId == userId && c.PostId == postId);
+            return await _context.Comments.SingleOrDefaultAsync(c => c.Id == commentId);
+        }
+
+        public async Task<Comment?> Get(Guid userId, Guid postId)
+        {
+            return await _context.Comments.SingleOrDefaultAsync(c => c.UserId == userId && c.PostId == postId);
         }
 
         public async Task Add(Comment comment)

@@ -2,7 +2,7 @@
 
 namespace CloneInstagramAPI.Application.Users.Commands
 {
-    public record UnbanUserByIdCommand
+    public record UpdateUserBanByIdCommand
     (
         Guid UserId
     ) : IRequest<bool>;

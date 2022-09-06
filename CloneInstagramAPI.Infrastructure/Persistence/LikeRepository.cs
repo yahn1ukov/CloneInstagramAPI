@@ -17,9 +17,9 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             _context = context;
         }
 
-        public async Task<Like> Get(Guid userId, Guid postId)
+        public async Task<Like?> Get(Guid userId, Guid postId)
         {
-            return await _context.Likes.SingleAsync(l => l.UserId == userId && l.PostId == postId);
+            return await _context.Likes.SingleOrDefaultAsync(l => l.UserId == userId && l.PostId == postId);
         }
 
         public async Task Add(Like like)

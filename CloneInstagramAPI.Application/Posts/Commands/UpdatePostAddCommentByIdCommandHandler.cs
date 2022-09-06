@@ -11,14 +11,14 @@ namespace CloneInstagramAPI.Application.Posts.Commands
     {
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
-        private readonly IPostActionRepository<Comment> _commentRepository;
+        private readonly ICommentRepository _commentRepository;
         private readonly IMapper _mapper;
 
         public UpdatePostAddCommentByIdCommandHandler
         (
             IUserRepository userRepository,
             IPostRepository postRepository,
-            IPostActionRepository<Comment> commentRepository,
+            ICommentRepository commentRepository,
             IMapper mapper
         )
         {

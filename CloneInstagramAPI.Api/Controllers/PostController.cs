@@ -61,23 +61,61 @@ namespace CloneInstagramAPI.Api.Controllers
             var result = await _mediator.Send(query);
 
             var comments = result.Comments
-                            .Select(c => _mapper.Map<GetAllCommentsResponse>(c))
+                            .Select(c => new GetAllCommentsResponse(c.Id, c.Message, c.Username, c.Avatar, c.CreatedAt))
                             .ToList();
 
-            return Ok(_mapper.Map<GetPostResponse>(result));
+            var post = new GetPostResponse
+            (
+                result.Id, result.Content, result.Description,
+                result.Avatar, result.Username, result.CountLikes,
+                result.CountSaves, result.CountComments, comments,
+                result.IsLike, result.IsSave, result.CreatedAt
+            );
+
+            return Ok(post);
         }
 
         [HttpGet("users/{username}")]
-        public async Task<IActionResult> GetAllPostsByUsername(string username)
+        public async Task<IActionResult> GetAllPostsUserByUsername(string username)
         {
-            var query = new GetAllPostsByUsernameQuery(username);
+            var query = new GetAllPostsUserByUsernameQuery(username);
 
             var result = await _mediator.Send(query);
 
             return Ok
             (
                  result
-                .Select(p => _mapper.Map<GetAllPostsResponse>(result))
+                .Select(p => _mapper.Map<GetAllPostsResponse>(p))
+                .ToList()   
+            );
+        }
+
+        [HttpGet("users/{username}/likes")]
+        public async Task<IActionResult> GetAllPostsLikesUserByUsername(string username)
+        {
+            var query = new GetAllPostsLikesUserByUsernameQuery(username);
+
+            var result = await _mediator.Send(query);
+
+            return Ok
+            (
+                 result
+                .Select(p => _mapper.Map<GetAllPostsResponse>(p))
+                .ToList()   
+            );
+        }
+
+        [HttpGet("users/{username}/saves")]
+        public async Task<IActionResult> GetAllPostsSavesUserByUsername(string username)
+        {
+            var query = new GetAllPostsSavesUserByUsernameQuery(username);
+
+            var result = await _mediator.Send(query);
+
+            return Ok
+            (
+                 result
+                .Select(p => _mapper.Map<GetAllPostsResponse>(p))
                 .ToList()   
             );
         }
@@ -92,7 +130,6 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "ADMIN, USER")]
         [HttpDelete("{postId}")]
         public async Task<IActionResult> DeletePostById(Guid postId)
         {

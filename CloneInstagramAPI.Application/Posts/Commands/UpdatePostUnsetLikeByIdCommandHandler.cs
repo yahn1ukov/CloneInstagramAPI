@@ -36,7 +36,10 @@ namespace CloneInstagramAPI.Application.Posts.Commands
                 throw new PostNotFoundException();
             }
 
-            var like = await _likeRepository.Get(user.Id, post.Id);
+            if(await _likeRepository.Get(user.Id, post.Id) is not Like like)
+            {
+                throw new PostLikeNotFoundException();
+            }
 
             await _likeRepository.Remove(like);
 

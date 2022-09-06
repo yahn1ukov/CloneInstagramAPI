@@ -9,18 +9,15 @@ namespace CloneInstagramAPI.Application.Posts.Commands
     public class UpdatePostDeleteCommentByIdCommandHandler : IRequestHandler<UpdatePostDeleteCommentByIdCommand, bool>
     {
         private readonly IUserRepository _userRepository;
-        private readonly IPostRepository _postRepository;
-        private readonly IPostActionRepository<Comment> _commentRepository;
+        private readonly ICommentRepository _commentRepository;
 
         public UpdatePostDeleteCommentByIdCommandHandler
         (
             IUserRepository userRepository,
-            IPostRepository postRepository,
-            IPostActionRepository<Comment> commentRepository
+            ICommentRepository commentRepository
         )
         {
             _userRepository = userRepository;
-            _postRepository = postRepository;
             _commentRepository = commentRepository;
         }
         public async Task<bool> Handle(UpdatePostDeleteCommentByIdCommand command, CancellationToken cancellationToken)
@@ -30,12 +27,15 @@ namespace CloneInstagramAPI.Application.Posts.Commands
                 throw new UserNotFoundException();
             }
 
-            if(await  _postRepository.GetById(command.CommentId) is not Post post)
+            if(await _commentRepository.Get(command.CommentId) is not Comment comment)
             {
-                throw new PostNotFoundException();
+                throw new PostCommentNotFoundException();
             }
 
-            var comment = await _commentRepository.Get(user.Id, post.Id);
+            if(comment.UserId != user.Id)
+            {
+                throw new PostCommentCannotBeDeletedException();
+            }
 
             await _commentRepository.Remove(comment);
 

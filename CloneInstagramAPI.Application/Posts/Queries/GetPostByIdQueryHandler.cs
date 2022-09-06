@@ -50,11 +50,17 @@ namespace CloneInstagramAPI.Application.Posts.Queries
             var countSaves = post.Saves.Count > 0 ? post.Saves.Count : 0;
 
             var comments = post.Comments
-                                .Select(c => _mapper.Map<GetAllCommentsResult>(c))
+                                .Select(c => new GetAllCommentsResult(c.Id, c.Message, c.User.Username, c.User.Avatar, c.CreatedAt))
                                 .ToList();
             int countComments = post.Comments.Count > 0 ? post.Comments.Count : 0;
 
-            return _mapper.Map<GetPostResult>(post);
+            return new GetPostResult
+            (
+                post.Id, post.Content, post.Description,
+                post.User.Avatar, post.User.Username,
+                countLikes, countSaves, countComments,
+                comments, isLike, isSave, post.CreatedAt
+            );
         }
     }
 }

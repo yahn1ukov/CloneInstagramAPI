@@ -17,9 +17,9 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             _context = context;
         }
 
-        public async Task<Save> Get(Guid userId, Guid postId)
+        public async Task<Save?> Get(Guid userId, Guid postId)
         {
-            return await _context.Saves.SingleAsync(s => s.UserId == userId && s.PostId == postId);
+            return await _context.Saves.SingleOrDefaultAsync(s => s.UserId == userId && s.PostId == postId);
         }
 
         public async Task Add(Save save)

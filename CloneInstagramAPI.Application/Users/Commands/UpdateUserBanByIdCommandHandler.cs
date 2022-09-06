@@ -1,15 +1,16 @@
 ﻿using CloneInstagramAPI.Application.Common.Exception.Error.User;
 using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Domain.Entities;
+using CloneInstagramAPI.Domain.Enums;
 using MediatR;
 
 namespace CloneInstagramAPI.Application.Users.Commands
 {
-    public class UnbanUserByIdCommandHandler : IRequestHandler<UnbanUserByIdCommand, bool>
+    public class UpdateUserBanByIdCommandHandler : IRequestHandler<UpdateUserBanByIdCommand, bool>
     {
         private readonly IUserRepository _userRepository;
 
-        public UnbanUserByIdCommandHandler
+        public UpdateUserBanByIdCommandHandler
         (
             IUserRepository userRepository
         )
@@ -17,19 +18,24 @@ namespace CloneInstagramAPI.Application.Users.Commands
             _userRepository = userRepository;
         }
 
-        public async Task<bool> Handle(UnbanUserByIdCommand command, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdateUserBanByIdCommand command, CancellationToken cancellationToken)
         {
             if (await _userRepository.GetById(command.UserId) is not User user)
             {
                 throw new UserNotFoundException();
             }
 
-            if (!user.IsBanned)
+            if (user.IsBanned)
             {
-                throw new UserIsUnbannedException();
+                throw new UserIsBannedException();
             }
 
-            user.IsBanned = false;
+            if(user.Role.Equals(UserRole.ADMIN))
+            {
+                throw new UserAdminCannotBeBannedException();
+            }
+
+            user.IsBanned = true;
 
             await _userRepository.Update(user);
 
