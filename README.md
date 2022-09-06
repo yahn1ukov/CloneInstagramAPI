@@ -20,14 +20,14 @@
 
 ## Enums
 
-|Name|Values|
-|-|-|
-|```UserRole```|```ADMIN```,```USER```|
-|```UserGender```|```MALE```,```FEMALE```|
+| Name | Values |
+| - | - |
+| ```UserRole``` | ```ADMIN```, ```USER``` |
+| ```UserGender``` | ```MALE```, ```FEMALE``` |
 
 ## Entities
 
-:heavy_check_mark: **User**
+### :heavy_check_mark: User
 
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
@@ -47,7 +47,7 @@
 |```IsDeactivated```|```boolean```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```false```|
 |```CreatedAt```|```DateTimeOffset```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```UtcNow```|
 
-:heavy_check_mark: **Post**
+### :heavy_check_mark: Post
 
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
@@ -57,7 +57,15 @@
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```CreatedAt```|```DateTimeOffset```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```UtcNow```|
 
-:heavy_check_mark: **Like**
+### :heavy_check_mark: Like
+
+| Name | Type | Primary Key | Foreign Key | Null | Not Null | Unique | Default Value |
+| - | - | - | - | - | - | - | - | - |
+| ```Id``` | ```Guid``` | :heavy_check_mark: | :x: | :x: | :heavy_check_mark: | :heavy_check_mark: | ```NewGuid``` |
+| ```UserId``` | ```Guid``` | :x: | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: |  |
+| ```PostId``` | ```Guid``` | :x: | :heavy_check_mark: | :heavy_check_mark: | :x: | :x: |  |
+
+### :heavy_check_mark: Save
 
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
@@ -65,15 +73,7 @@
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```PostId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 
-:heavy_check_mark: **Save**
-
-|Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
-|-|-|-|-|-|-|-|-|-|
-|```Id```|```Guid```|:heavy_check_mark:|:x:|:x:|:heavy_check_mark:|:heavy_check_mark:|```NewGuid```|
-|```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
-|```PostId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
-
-:heavy_check_mark: **Comment**
+### :heavy_check_mark: Comment
 
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
@@ -83,7 +83,7 @@
 |```PostId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```CreatedAt```|```DateTimeOffset```|:x:|:x:|:x:|:heavy_check_mark:|:x:|```UtcNow```|
 
-:x: **Follower**
+### :x: Follower
 
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
@@ -91,7 +91,7 @@
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```FollowingUserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 
-:x: **Room**
+### :x: Room
 
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
@@ -99,7 +99,7 @@
 |```UserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 |```PenPalUserId```|```Guid```|:x:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:||
 
-:x: **Message**
+### :x: Message
 
 |Name|Type|Primary Key|Foreign Key|Null|Not Null|Unique|Default Value|
 |-|-|-|-|-|-|-|-|-|
