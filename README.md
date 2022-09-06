@@ -2,10 +2,6 @@
 ---
 ## Software Architecture
 - [Clean Architecture](https://www.c-sharpcorner.com/article/introduction-to-clean-architecture-and-implementation-with-asp-net-core/#:~:text=Clean%20Architecture%20is%20a%20software,written%20without%20any%20direct%20dependencies.)
-    - WebAPI Layer;
-    - Application Layer;
-    - Infrastructure Layer;
-    - Domain Layer.
 ## Technologies
 - [C#](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10)
    - Collections;
