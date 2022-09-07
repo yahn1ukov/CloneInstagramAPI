@@ -3,11 +3,11 @@
     public record UpdateUserRequest
     (
         string? Avatar,
-        string? FullName,
-        string? Username,
+        string FullName,
+        string Username,
         string? WebSite,
         string? Biography,
-        string? Email,
+        string Email,
         string? PhoneNumber,
         int? Gender
     );
