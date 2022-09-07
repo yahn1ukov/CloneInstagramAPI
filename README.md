@@ -3,6 +3,6 @@
 
 ## :page_with_curl: Content
 
-:one: [Technologies](/about/TECHNOLOGIES.md)
-:two: [Entities](/about/ENTITIES.md)
+:one: [Technologies](/about/TECHNOLOGIES.md)<br/>
+:two: [Entities](/about/ENTITIES.md)<br/>
 :three: [Endpoints](/about/ENDPOINTS.md)
