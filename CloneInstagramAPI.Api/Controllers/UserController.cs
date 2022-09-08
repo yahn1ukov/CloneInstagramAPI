@@ -54,7 +54,12 @@ namespace CloneInstagramAPI.Api.Controllers
 
             var result = await _mediator.Send(query);
 
-            return Ok(_mapper.Map<GetAllFollowersResponse>(result));
+            return Ok
+            (
+                result
+                .Select(r => _mapper.Map<GetAllFollowersResponse>(r))
+                .ToList()
+            );
         }
 
         [HttpGet("{username}/following")]
@@ -64,7 +69,12 @@ namespace CloneInstagramAPI.Api.Controllers
 
             var result = await _mediator.Send(query);
 
-            return Ok(_mapper.Map<GetAllFollowersResponse>(result));
+            return Ok
+            (
+                result
+                .Select(r => _mapper.Map<GetAllFollowersResponse>(r))
+                .ToList()
+            );
         }
 
         [HttpPatch]

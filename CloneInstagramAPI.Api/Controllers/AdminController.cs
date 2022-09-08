@@ -39,7 +39,7 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok
             (
                 result
-                .Select(u => _mapper.Map<GetAllUsersResponse>(u))
+                .Select(r => _mapper.Map<GetAllUsersResponse>(r))
                 .ToList()
             );
         }
@@ -54,7 +54,7 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok
             (
                 result
-                .Select(p => _mapper.Map<GetAllPostsResponse>(p))
+                .Select(r => _mapper.Map<GetAllPostsResponse>(r))
                 .ToList()
             );
         }

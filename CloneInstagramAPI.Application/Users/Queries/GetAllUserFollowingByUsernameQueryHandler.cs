@@ -23,7 +23,7 @@ namespace CloneInstagramAPI.Application.Users.Queries
 
         public async Task<ICollection<GetAllFollowersResult>> Handle(GetAllUserFollowingByUsernameQuery query, CancellationToken cancellationToken)
         {
-            if(await _userRepository.GetByUsername(query.Username) is not User user)
+            if (await _userRepository.GetByUsername(query.Username) is not User user)
             {
                 throw new UserNotFoundException();
             }
@@ -31,7 +31,7 @@ namespace CloneInstagramAPI.Application.Users.Queries
             var following = await _followerRepository.GetAllFollowing(user.Id);
 
             return following
-                .Select(f => new GetAllFollowersResult(f.Id, f.User.Username, f.User.FullName))
+                .Select(f => new GetAllFollowersResult(f.Id, f.FollowingUser.Username, f.FollowingUser.FullName))
                 .ToList();
         }
     }

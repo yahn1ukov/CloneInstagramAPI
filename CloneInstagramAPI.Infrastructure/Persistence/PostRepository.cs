@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using CloneInstagramAPI.Application.Persistence;
+﻿using CloneInstagramAPI.Application.Persistence;
 using CloneInstagramAPI.Domain.Entities;
 using CloneInstagramAPI.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +37,10 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
         public async Task<ICollection<Post>> GetAll()
         {
             return await _context.Posts
+                .Include(p => p.User)
+                .Include(p => p.Likes)
+                .Include(p => p.Saves)
+                .Include(p => p.Comments)
                 .Where(p => p.UserId != null)
                 .ToListAsync();
         }

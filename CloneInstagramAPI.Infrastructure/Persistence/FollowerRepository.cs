@@ -28,7 +28,7 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
         public async Task<ICollection<Follower>> GetAllFollowing(Guid userId)
         {
             return await _context.Followers
-                .Include(f => f.User)
+                .Include(f => f.FollowingUser)
                 .Where(f => f.UserId == userId)
                 .ToListAsync();
         }
@@ -50,16 +50,6 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             _context.Followers.Remove(follower);
 
             await _context.SaveChangesAsync();
-        }
-
-        public Task<ICollection<Follower>> GetAll(Guid entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ICollection<Follower>> GetAll()
-        {
-            throw new NotImplementedException();
         }
     }
 }

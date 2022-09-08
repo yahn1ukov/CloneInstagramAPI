@@ -48,10 +48,5 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
 
             await _context.SaveChangesAsync();
         }
-
-        public async Task<ICollection<Comment>> GetAll()
-        {
-            return await _context.Comments.ToListAsync();
-        }
     }
 }

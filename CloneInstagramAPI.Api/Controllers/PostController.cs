@@ -48,7 +48,7 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok
             (
                 result
-                .Select(p => _mapper.Map<GetAllPostsResponse>(p))
+                .Select(r => _mapper.Map<GetAllPostsResponse>(r))
                 .ToList()
             );
         }
@@ -84,8 +84,8 @@ namespace CloneInstagramAPI.Api.Controllers
 
             return Ok
             (
-                 result
-                .Select(p => _mapper.Map<GetAllPostsResponse>(p))
+                result
+                .Select(r => _mapper.Map<GetAllPostsResponse>(r))
                 .ToList()   
             );
         }
@@ -99,8 +99,8 @@ namespace CloneInstagramAPI.Api.Controllers
 
             return Ok
             (
-                 result
-                .Select(p => _mapper.Map<GetAllPostsResponse>(p))
+                result
+                .Select(r => _mapper.Map<GetAllPostsResponse>(r))
                 .ToList()   
             );
         }
@@ -114,8 +114,8 @@ namespace CloneInstagramAPI.Api.Controllers
 
             return Ok
             (
-                 result
-                .Select(p => _mapper.Map<GetAllPostsResponse>(p))
+                result
+                .Select(r => _mapper.Map<GetAllPostsResponse>(r))
                 .ToList()   
             );
         }
@@ -129,8 +129,8 @@ namespace CloneInstagramAPI.Api.Controllers
 
             return Ok
             (
-                 result
-                .Select(p => _mapper.Map<GetAllPostsFollowingResponse>(p))
+                result
+                .Select(r => _mapper.Map<GetAllPostsFollowingResponse>(r))
                 .ToList()   
             );
         }

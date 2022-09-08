@@ -32,7 +32,7 @@ namespace CloneInstagramAPI.Application.Users.Commands
                 throw new UserNotFoundException();
             }
 
-            if(await _followerRepository.Get(user.Id, userFollowing.Id) is null)
+            if(await _followerRepository.Get(user.Id, userFollowing.Id) is not null)
             {
                 throw new UserFollowingAlreadyExistsException();
             }
