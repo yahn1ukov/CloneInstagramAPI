@@ -4,6 +4,6 @@
     (
         string OldPassword,
         string NewPassword,
-        string ConfirmedNewPassword
+        string ConfirmNewPassword
     );
 }

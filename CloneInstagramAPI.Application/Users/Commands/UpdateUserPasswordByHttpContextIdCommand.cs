@@ -6,6 +6,6 @@ namespace CloneInstagramAPI.Application.Users.Commands
     (
         string OldPassword,
         string NewPassword,
-        string ConfirmedNewPassword
+        string ConfirmNewPassword
     ) : IRequest<bool>;
 }

@@ -9,10 +9,12 @@ namespace CloneInstagramAPI.Api.Common.Mapping
     {
         public UserMappingProfile()
         {
+            CreateMap<UpdateUserPasswordRequest, UpdateUserPasswordByHttpContextIdCommand>();
+            CreateMap<UpdateUserRequest, UpdateUserByHttpContextIdCommand>();
+            
             CreateMap<GetUserResult, GetUserResponse>();
             CreateMap<GetAllUsersResult, GetAllUsersResponse>();
-            CreateMap<UpdateUserRequest, UpdateUserByHttpContextIdCommand>();
-            CreateMap<UpdateUserPasswordRequest, UpdateUserPasswordByHttpContextIdCommand>();
+            CreateMap<GetUserForNavbarResult, GetUserForNavbarResponse>();
         }
     }
 }

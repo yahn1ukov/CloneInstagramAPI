@@ -7,7 +7,7 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Users.Queries
 {
-    public class GetUserByHttpContextIdQueryHandler : IRequestHandler<GetUserByHttpContextIdQuery, GetUserResult>
+    public class GetUserByHttpContextIdQueryHandler : IRequestHandler<GetUserByHttpContextIdQuery, GetUserForNavbarResult>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
@@ -22,14 +22,14 @@ namespace CloneInstagramAPI.Application.Users.Queries
             _mapper = mapper;
         }
 
-        public async Task<GetUserResult> Handle(GetUserByHttpContextIdQuery query, CancellationToken cancellationToken)
+        public async Task<GetUserForNavbarResult> Handle(GetUserByHttpContextIdQuery query, CancellationToken cancellationToken)
         {
             if (await _userRepository.GetById() is not User user)
             {
                 throw new UserNotFoundException();
             }
 
-            return _mapper.Map<GetUserResult>(user);
+            return _mapper.Map<GetUserForNavbarResult>(user);
         }
     }
 }

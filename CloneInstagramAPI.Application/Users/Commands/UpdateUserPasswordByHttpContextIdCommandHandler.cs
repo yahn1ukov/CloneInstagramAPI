@@ -38,7 +38,7 @@ namespace CloneInstagramAPI.Application.Users.Commands
                 throw new UserOldPasswordSameNewPasswordException();
             }
 
-            if (!command.NewPassword.Equals(command.ConfirmedNewPassword))
+            if (!command.NewPassword.Equals(command.ConfirmNewPassword))
             {
                 throw new UserNewPasswordNotSameConfirmedNewPasswordException();
             }

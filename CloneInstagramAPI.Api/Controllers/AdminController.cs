@@ -59,16 +59,6 @@ namespace CloneInstagramAPI.Api.Controllers
             );
         }
 
-        [HttpGet("users/{userId}")]
-        public async Task<IActionResult> GetUserById(Guid userId)
-        {
-            var query = new GetUserByIdQuery(userId);
-
-            var result = await _mediator.Send(query);
-
-            return Ok(_mapper.Map<GetUserResponse>(result));
-        }
-
         [HttpPatch("users/{userId}")]
         public async Task<IActionResult> UpdateUserRoleById(Guid userId, UpdateUserRoleRequest request)
         {

@@ -34,7 +34,7 @@ namespace CloneInstagramAPI.Api.Controllers
 
             var result = await _mediator.Send(query);
 
-            return Ok(_mapper.Map<GetUserResponse>(result));
+            return Ok(_mapper.Map<GetUserForNavbarResponse>(result));
         }
 
         [HttpGet("{username}")]
