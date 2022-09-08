@@ -1,6 +1,6 @@
-﻿namespace CloneInstagramAPI.Contracts.Post
+namespace CloneInstagramAPI.Application.Posts.Common
 {
-    public record GetPostResponse
+    public record GetAllPostsFollowingResult
     (
         Guid Id,
         string Content,
@@ -10,7 +10,6 @@
         int CountLikes,
         int CountSaves,
         int CountComments,
-        ICollection<GetAllCommentsResponse> Comments,
         bool IsLike,
         bool IsSave,
         DateTimeOffset CreatedAt

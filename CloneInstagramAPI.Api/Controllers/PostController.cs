@@ -120,6 +120,21 @@ namespace CloneInstagramAPI.Api.Controllers
             );
         }
 
+        [HttpGet("users/{username}/following")]
+        public async Task<IActionResult> GetAllPostsFollowingByUsername(string username)
+        {
+            var query = new GetAllPostsFollowingByUsernameQuery(username);
+
+            var result = await _mediator.Send(query);
+
+            return Ok
+            (
+                 result
+                .Select(p => _mapper.Map<GetAllPostsFollowingResponse>(p))
+                .ToList()   
+            );
+        }
+
         [HttpPatch("{postId}")]
         public async Task<IActionResult> UpdatePostById(Guid postId, UpdatePostRequest request)
         {

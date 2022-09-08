@@ -43,9 +43,10 @@ namespace CloneInstagramAPI.Infrastructure
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
-            services.AddScoped<IPostActionRepository<Like>, LikeRepository>();
-            services.AddScoped<IPostActionRepository<Save>, SaveRepository>();
+            services.AddScoped<IActionRepository<Like>, LikeRepository>();
+            services.AddScoped<IActionRepository<Save>, SaveRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IFollowerRepository, FollowerRepository>();
 
             return services;
         }

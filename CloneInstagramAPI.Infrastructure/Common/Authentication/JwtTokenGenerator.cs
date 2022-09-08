@@ -26,19 +26,19 @@ namespace CloneInstagramAPI.Infrastructure.Common.Authentication
 
         public string GeneratorToken(User user)
         {
-            Claim[] claims = new[]
+            var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Role, user.Role.ToString())
             };
 
-            byte[] secretKey = Encoding.UTF8.GetBytes(_jwtTokenSettings.Secret);
+            var secretKey = Encoding.UTF8.GetBytes(_jwtTokenSettings.Secret);
 
-            SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(secretKey);
+            var symmetricSecurityKey = new SymmetricSecurityKey(secretKey);
 
-            SigningCredentials signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
+            var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 
-            JwtSecurityToken token = new JwtSecurityToken
+            var token = new JwtSecurityToken
             (
                 issuer: _jwtTokenSettings.Issuer,
                 audience: _jwtTokenSettings.Audience,
@@ -47,7 +47,7 @@ namespace CloneInstagramAPI.Infrastructure.Common.Authentication
                 claims: claims
             );
 
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            var tokenHandler = new JwtSecurityTokenHandler();
 
             return tokenHandler.WriteToken(token);
         }

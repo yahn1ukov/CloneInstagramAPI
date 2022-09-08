@@ -6,5 +6,5 @@ namespace CloneInstagramAPI.Application.Posts.Queries
     public record GetAllPostsUserByUsernameQuery
     (
         string Username
-    ) : IRequest<IEnumerable<GetAllPostsResult>>;
+    ) : IRequest<ICollection<GetAllPostsResult>>;
 }

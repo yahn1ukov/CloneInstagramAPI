@@ -3,5 +3,5 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Posts.Queries
 {
-    public record GetAllPostsWithoutUsersQuery() : IRequest<IEnumerable<GetAllPostsResult>>;
+    public record GetAllPostsWithoutUsersQuery() : IRequest<ICollection<GetAllPostsResult>>;
 }

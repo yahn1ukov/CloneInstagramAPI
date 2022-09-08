@@ -15,6 +15,7 @@ namespace CloneInstagramAPI.Api.Common.Mapping
             CreateMap<GetUserResult, GetUserResponse>();
             CreateMap<GetAllUsersResult, GetAllUsersResponse>();
             CreateMap<GetUserForNavbarResult, GetUserForNavbarResponse>();
+            CreateMap<GetAllFollowersResult, GetAllFollowersResponse>();
         }
     }
 }

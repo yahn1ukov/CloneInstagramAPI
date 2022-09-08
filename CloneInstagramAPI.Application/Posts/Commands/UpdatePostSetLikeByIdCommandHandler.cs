@@ -11,13 +11,13 @@ namespace CloneInstagramAPI.Application.Posts.Commands
     {
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
-        private readonly IPostActionRepository<Like> _likeRepository;
+        private readonly IActionRepository<Like> _likeRepository;
 
         public UpdatePostSetLikeByIdCommandHandler
         (
             IUserRepository userRepository, 
             IPostRepository postRepository,
-            IPostActionRepository<Like> likeRepository
+            IActionRepository<Like> likeRepository
         )
         {
             _userRepository = userRepository;

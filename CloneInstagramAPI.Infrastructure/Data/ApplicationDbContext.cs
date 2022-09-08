@@ -60,6 +60,13 @@ namespace CloneInstagramAPI.Infrastructure.Data
                 .HasForeignKey(c => c.PostId)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Follower>()
+                .HasOne<User>(f => f.User)
+                .WithMany(u => u.Followers)
+                .HasForeignKey(f => f.UserId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
         }
 
         public DbSet<User> Users { get; set; }
@@ -67,5 +74,6 @@ namespace CloneInstagramAPI.Infrastructure.Data
         public DbSet<Like> Likes { get; set; }
         public DbSet<Save> Saves { get; set;}
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Follower> Followers { get; set; }
     }
 }

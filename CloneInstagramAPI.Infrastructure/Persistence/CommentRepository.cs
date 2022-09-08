@@ -17,6 +17,14 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             _context = context;
         }
 
+        public async Task<ICollection<Comment>> GetAll(Guid postId)
+        {
+            return await _context.Comments
+                .Include(c => c.User)
+                .Where(c => c.PostId == postId)
+                .ToListAsync();
+        }
+
         public async Task<Comment?> Get(Guid commentId)
         {
             return await _context.Comments.SingleOrDefaultAsync(c => c.Id == commentId);
@@ -39,6 +47,11 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             _context.Comments.Remove(comment);
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<ICollection<Comment>> GetAll()
+        {
+            return await _context.Comments.ToListAsync();
         }
     }
 }

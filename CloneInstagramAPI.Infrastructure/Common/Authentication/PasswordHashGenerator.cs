@@ -8,7 +8,7 @@ namespace CloneInstagramAPI.Infrastructure.Common.Authentication
     {
         public void GeneratePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            HMACSHA256 hmac = new HMACSHA256();
+            var hmac = new HMACSHA256();
 
             passwordSalt = hmac.Key;
             passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
@@ -16,9 +16,9 @@ namespace CloneInstagramAPI.Infrastructure.Common.Authentication
 
         public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            HMACSHA256 hmac = new HMACSHA256(passwordSalt);
+            var hmac = new HMACSHA256(passwordSalt);
 
-            byte[] computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+            var computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
 
             return computeHash.SequenceEqual(passwordHash);
         }

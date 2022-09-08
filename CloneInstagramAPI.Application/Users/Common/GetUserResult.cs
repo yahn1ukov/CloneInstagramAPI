@@ -9,6 +9,10 @@
         string? WebSite,
         string? PhoneNumber,
         string? Gender,
-        string? Biography
+        string? Biography,
+        int CountPosts,
+        int CountFollowers,
+        int CountFollowing,
+        bool isFollowing
     );
 }

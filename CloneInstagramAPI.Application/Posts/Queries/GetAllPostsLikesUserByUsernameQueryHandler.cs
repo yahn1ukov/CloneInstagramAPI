@@ -7,7 +7,7 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Posts.Queries
 {
-    public class GetAllPostsLikesUserByUsernameQueryHandler : IRequestHandler<GetAllPostsLikesUserByUsernameQuery, IEnumerable<GetAllPostsResult>>
+    public class GetAllPostsLikesUserByUsernameQueryHandler : IRequestHandler<GetAllPostsLikesUserByUsernameQuery, ICollection<GetAllPostsResult>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
@@ -26,7 +26,7 @@ namespace CloneInstagramAPI.Application.Posts.Queries
         }
 
 
-        public async Task<IEnumerable<GetAllPostsResult>> Handle(GetAllPostsLikesUserByUsernameQuery query, CancellationToken cancellationToken)
+        public async Task<ICollection<GetAllPostsResult>> Handle(GetAllPostsLikesUserByUsernameQuery query, CancellationToken cancellationToken)
         {
             if(await _userRepository.GetByUsername(query.Username) is not User user)
             {

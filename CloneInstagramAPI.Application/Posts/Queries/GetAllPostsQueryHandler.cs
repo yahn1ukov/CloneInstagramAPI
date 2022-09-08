@@ -6,7 +6,7 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Posts.Queries
 {
-    public class GetAllPostsQueryHandler : IRequestHandler<GetAllPostsQuery, IEnumerable<GetAllPostsResult>>
+    public class GetAllPostsQueryHandler : IRequestHandler<GetAllPostsQuery, ICollection<GetAllPostsResult>>
     {
         private readonly IPostRepository _postRepository;
         private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ namespace CloneInstagramAPI.Application.Posts.Queries
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<GetAllPostsResult>> Handle(GetAllPostsQuery query, CancellationToken cancellationToken)
+        public async Task<ICollection<GetAllPostsResult>> Handle(GetAllPostsQuery query, CancellationToken cancellationToken)
         {
             var posts = await _postRepository.GetAll();
 

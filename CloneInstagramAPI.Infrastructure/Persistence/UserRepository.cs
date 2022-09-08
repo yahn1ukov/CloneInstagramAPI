@@ -75,7 +75,7 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             return await _context.Users.SingleOrDefaultAsync(u => u.Username.ToLower().Equals(username.ToLower()));
         }
 
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<ICollection<User>> GetAll()
         {
             return await _context.Users.ToListAsync();
         }

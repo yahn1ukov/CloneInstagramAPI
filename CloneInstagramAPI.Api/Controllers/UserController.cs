@@ -47,6 +47,26 @@ namespace CloneInstagramAPI.Api.Controllers
             return Ok(_mapper.Map<GetUserResponse>(result));
         }
 
+        [HttpGet("{username}/followers")]
+        public async Task<IActionResult> GetAllUserFollowersByUsername(string username)
+        {
+            var query = new GetAllUserFollowersByUsernameQuery(username);
+
+            var result = await _mediator.Send(query);
+
+            return Ok(_mapper.Map<GetAllFollowersResponse>(result));
+        }
+
+        [HttpGet("{username}/following")]
+        public async Task<IActionResult> GetAllUserFollowingByUsername(string username)
+        {
+            var query = new GetAllUserFollowingByUsernameQuery(username);
+
+            var result = await _mediator.Send(query);
+
+            return Ok(_mapper.Map<GetAllFollowersResponse>(result));
+        }
+
         [HttpPatch]
         public async Task<IActionResult> UpdateUserByHttpContextId(UpdateUserRequest request)
         {
@@ -71,6 +91,26 @@ namespace CloneInstagramAPI.Api.Controllers
         public async Task<IActionResult> DeleteUserByHttpContextId()
         {
             var command = new DeleteUserByHttpContextIdCommand();
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpPost("{username}/following")]
+        public async Task<IActionResult> UpdateUserFollowingByUsername(string username)
+        {
+            var command = new UpdateUserFollowingByUsernameCommand(username);
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{username}/unfollowing")]
+        public async Task<IActionResult> UpdateUserUnfollowingByUsername(string username)
+        {
+            var command = new UpdateUserUnfollowingByUsernameCommand(username);
 
             var result = await _mediator.Send(command);
 
