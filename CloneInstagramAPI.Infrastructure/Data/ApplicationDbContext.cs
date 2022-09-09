@@ -67,6 +67,27 @@ namespace CloneInstagramAPI.Infrastructure.Data
                 .HasForeignKey(f => f.UserId)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Room>()
+                .HasOne<User>(r => r.User)
+                .WithMany(u => u.Rooms)
+                .HasForeignKey(r => r.UserId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Message>()
+                .HasOne<User>(m => m.User)
+                .WithMany(u => u.Messages)
+                .HasForeignKey(m => m.UserId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Message>()
+                .HasOne<Room>(m => m.Room)
+                .WithMany(p => p.Messages)
+                .HasForeignKey(m => m.RoomId)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.SetNull);
         }
 
         public DbSet<User> Users { get; set; }
@@ -75,5 +96,7 @@ namespace CloneInstagramAPI.Infrastructure.Data
         public DbSet<Save> Saves { get; set;}
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Follower> Followers { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 }

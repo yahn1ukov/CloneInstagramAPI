@@ -64,6 +64,8 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FollowingUserId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Followers");
@@ -90,6 +92,37 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
                     b.ToTable("Likes");
                 });
 
+            modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Message", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("IsEdited")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("RoomId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Post", b =>
                 {
                     b.Property<Guid>("Id")
@@ -114,6 +147,27 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Room", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("PenPalUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PenPalUserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Save", b =>
@@ -214,10 +268,16 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
 
             modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Follower", b =>
                 {
+                    b.HasOne("CloneInstagramAPI.Domain.Entities.User", "FollowingUser")
+                        .WithMany()
+                        .HasForeignKey("FollowingUserId");
+
                     b.HasOne("CloneInstagramAPI.Domain.Entities.User", "User")
                         .WithMany("Followers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("FollowingUser");
 
                     b.Navigation("User");
                 });
@@ -239,12 +299,45 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Message", b =>
+                {
+                    b.HasOne("CloneInstagramAPI.Domain.Entities.Room", "Room")
+                        .WithMany("Messages")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("CloneInstagramAPI.Domain.Entities.User", "User")
+                        .WithMany("Messages")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Room");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Post", b =>
                 {
                     b.HasOne("CloneInstagramAPI.Domain.Entities.User", "User")
                         .WithMany("Posts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Room", b =>
+                {
+                    b.HasOne("CloneInstagramAPI.Domain.Entities.User", "PenPalUser")
+                        .WithMany()
+                        .HasForeignKey("PenPalUserId");
+
+                    b.HasOne("CloneInstagramAPI.Domain.Entities.User", "User")
+                        .WithMany("Rooms")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("PenPalUser");
 
                     b.Navigation("User");
                 });
@@ -275,6 +368,11 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
                     b.Navigation("Saves");
                 });
 
+            modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.Room", b =>
+                {
+                    b.Navigation("Messages");
+                });
+
             modelBuilder.Entity("CloneInstagramAPI.Domain.Entities.User", b =>
                 {
                     b.Navigation("Comments");
@@ -283,7 +381,11 @@ namespace CloneInstagramAPI.Infrastructure.Migrations
 
                     b.Navigation("Likes");
 
+                    b.Navigation("Messages");
+
                     b.Navigation("Posts");
+
+                    b.Navigation("Rooms");
 
                     b.Navigation("Saves");
                 });

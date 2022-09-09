@@ -31,7 +31,7 @@ namespace CloneInstagramAPI.Application.Posts.Queries
 
         public async Task<GetPostResult> Handle(GetPostByIdQuery query, CancellationToken cancellationToken)
         {
-            if (await _userRepository.GetById() is not User user)
+            if (await _userRepository.Get() is not User user)
             {
                 throw new UserNotFoundException();
             }
@@ -46,7 +46,7 @@ namespace CloneInstagramAPI.Application.Posts.Queries
                 throw new PostNotFoundException();
             }
 
-            var comments = await _commentRepository.GetAll(post.Id);
+            var comments = await _commentRepository.GetAllById(post.Id);
 
             var isLike = post.Likes.Any(l => l.UserId == user.Id) ? true : false;
             var countLikes = post.Likes.Count > 0 ? post.Likes.Count : 0;

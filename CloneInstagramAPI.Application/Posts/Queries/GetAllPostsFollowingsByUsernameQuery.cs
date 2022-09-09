@@ -3,8 +3,8 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Posts.Queries
 {
-    public record GetAllPostsFollowingByUsernameQuery
+    public record GetAllPostsFollowingsByUsernameQuery
     (
         string Username
-    ) : IRequest<ICollection<GetAllPostsFollowingResult>>;
+    ) : IRequest<ICollection<GetAllPostsFollowingsResult>>;
 }

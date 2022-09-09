@@ -22,7 +22,7 @@ namespace CloneInstagramAPI.Application.Users.Commands
         
         public async Task<bool> Handle(UpdateUserFollowingByUsernameCommand command, CancellationToken cancellationToken)
         {
-            if(await _userRepository.GetById() is not User user)
+            if(await _userRepository.Get() is not User user)
             {
                 throw new UserNotFoundException();
             }
@@ -32,7 +32,7 @@ namespace CloneInstagramAPI.Application.Users.Commands
                 throw new UserNotFoundException();
             }
 
-            if(await _followerRepository.Get(user.Id, userFollowing.Id) is not null)
+            if(await _followerRepository.GetById(user.Id, userFollowing.Id) is not null)
             {
                 throw new UserFollowingAlreadyExistsException();
             }

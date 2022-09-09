@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CloneInstagramAPI.Application.Users.Commands;
 using CloneInstagramAPI.Application.Users.Common;
+using CloneInstagramAPI.Contracts.Follower;
 using CloneInstagramAPI.Contracts.User;
 
 namespace CloneInstagramAPI.Api.Common.Mapping

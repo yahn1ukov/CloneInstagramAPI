@@ -10,13 +10,13 @@ namespace CloneInstagramAPI.Application.Posts.Commands
     {
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
-        private readonly IActionRepository<Save> _saveRepository;
+        private readonly ISaveRepository _saveRepository;
 
         public UpdatePostUnsetSaveByIdCommandHandler
         (
             IUserRepository userRepository, 
             IPostRepository postRepository,
-            IActionRepository<Save> saveRepository
+            ISaveRepository saveRepository
         )
         {
             _userRepository = userRepository;
@@ -26,7 +26,7 @@ namespace CloneInstagramAPI.Application.Posts.Commands
 
         public async Task<bool> Handle(UpdatePostUnsetSaveByIdCommand command, CancellationToken cancellationToken)
         {
-            if(await _userRepository.GetById() is not User user)
+            if(await _userRepository.Get() is not User user)
             {
                 throw new UserNotFoundException();
             }
@@ -36,7 +36,7 @@ namespace CloneInstagramAPI.Application.Posts.Commands
                 throw new PostNotFoundException();
             }
 
-            if(await _saveRepository.Get(user.Id, post.Id) is not Save save)
+            if(await _saveRepository.GetById(user.Id, post.Id) is not Save save)
             {
                 throw new PostSaveNotFoundException();
             }

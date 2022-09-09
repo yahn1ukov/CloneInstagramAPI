@@ -1,4 +1,6 @@
-﻿namespace CloneInstagramAPI.Contracts.Post
+﻿using CloneInstagramAPI.Contracts.Comment;
+
+namespace CloneInstagramAPI.Contracts.Post
 {
     public record GetPostResponse
     (

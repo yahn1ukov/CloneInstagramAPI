@@ -10,13 +10,13 @@ namespace CloneInstagramAPI.Application.Posts.Commands
     {
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
-        private readonly IActionRepository<Like> _likeRepository;
+        private readonly ILikeRepository _likeRepository;
 
         public UpdatePostUnsetLikeByIdCommandHandler
         (
             IUserRepository userRepository, 
             IPostRepository postRepository,
-            IActionRepository<Like> likeRepository
+            ILikeRepository likeRepository
         )
         {
             _userRepository = userRepository;
@@ -26,7 +26,7 @@ namespace CloneInstagramAPI.Application.Posts.Commands
 
         public async Task<bool> Handle(UpdatePostUnsetLikeByIdCommand command, CancellationToken cancellationToken)
         {
-            if(await _userRepository.GetById() is not User user)
+            if(await _userRepository.Get() is not User user)
             {
                 throw new UserNotFoundException();
             }
@@ -36,7 +36,7 @@ namespace CloneInstagramAPI.Application.Posts.Commands
                 throw new PostNotFoundException();
             }
 
-            if(await _likeRepository.Get(user.Id, post.Id) is not Like like)
+            if(await _likeRepository.GetById(user.Id, post.Id) is not Like like)
             {
                 throw new PostLikeNotFoundException();
             }

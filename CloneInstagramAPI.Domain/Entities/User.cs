@@ -23,6 +23,8 @@ namespace CloneInstagramAPI.Domain.Entities
         public ICollection<Save> Saves { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Follower> Followers { get; set; }
+        public ICollection<Room> Rooms { get; set; }
+        public ICollection<Message> Messages { get; set; }
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
     }
 }

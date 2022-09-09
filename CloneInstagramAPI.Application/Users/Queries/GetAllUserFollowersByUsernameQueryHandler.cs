@@ -32,7 +32,7 @@ namespace CloneInstagramAPI.Application.Users.Queries
                 throw new UserNotFoundException();
             }
 
-            var followers = await _followerRepository.GetAllFollowers(user.Id);
+            var followers = await _followerRepository.GetAllFollowersById(user.Id);
 
             return followers
                 .Select(f => new GetAllFollowersResult(f.Id, f.User.Username, f.User.FullName))

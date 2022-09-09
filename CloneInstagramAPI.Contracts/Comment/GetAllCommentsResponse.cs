@@ -1,4 +1,4 @@
-namespace CloneInstagramAPI.Contracts.Post
+namespace CloneInstagramAPI.Contracts.Comment
 {
     public record GetAllCommentsResponse
     (

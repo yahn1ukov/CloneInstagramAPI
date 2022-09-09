@@ -1,6 +1,6 @@
-namespace CloneInstagramAPI.Contracts.Post
+namespace CloneInstagramAPI.Application.Posts.Common
 {
-    public record GetAllPostsFollowingResponse
+    public record GetAllPostsFollowingsResult
     (
         Guid Id,
         string Content,

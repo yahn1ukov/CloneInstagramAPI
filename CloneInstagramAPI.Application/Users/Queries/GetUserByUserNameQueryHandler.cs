@@ -31,6 +31,11 @@ namespace CloneInstagramAPI.Application.Users.Queries
 
         public async Task<GetUserResult> Handle(GetUserByUsernameQuery query, CancellationToken cancellationToken)
         {
+            if(await _userRepository.Get() is not User userHttpContext)
+            {
+                throw new UserNotFoundException();
+            }
+
             if (await _userRepository.GetByUsername(query.Username) is not User user)
             {
                 throw new UserNotFoundException();
@@ -42,14 +47,14 @@ namespace CloneInstagramAPI.Application.Users.Queries
             }
 
             var posts = await _postRepository.GetAllUserById(user.Id);
-            var followers = await _followerRepository.GetAllFollowers(user.Id);
-            var following = await _followerRepository.GetAllFollowing(user.Id);
+            var followers = await _followerRepository.GetAllFollowersById(user.Id);
+            var following = await _followerRepository.GetAllFollowingsById(user.Id);
 
             var countPosts = posts.Count > 0 ? posts.Count : 0;
             var countFollowers = followers.Count > 0 ? followers.Count : 0;
             var countFollowing = following.Count > 0 ? following.Count : 0;
 
-            var isFollowing = following.Any(f => f.FollowingUserId == user.Id) ? true : false;
+            var isFollowing = followers.Any(f => f.UserId == userHttpContext.Id) ? true : false;
 
             return new GetUserResult
             (

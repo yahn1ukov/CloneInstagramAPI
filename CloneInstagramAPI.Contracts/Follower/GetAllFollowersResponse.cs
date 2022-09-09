@@ -1,4 +1,4 @@
-namespace CloneInstagramAPI.Contracts.User
+namespace CloneInstagramAPI.Contracts.Follower
 {
     public record GetAllFollowersResponse
     (

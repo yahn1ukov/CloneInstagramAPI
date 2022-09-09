@@ -6,13 +6,13 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Posts.Queries
 {
-    public class GetAllPostsFollowingByUsernameQueryHandler : IRequestHandler<GetAllPostsFollowingByUsernameQuery, ICollection<GetAllPostsFollowingResult>>
+    public class GetAllPostsFollowingsByUsernameQueryHandler : IRequestHandler<GetAllPostsFollowingsByUsernameQuery, ICollection<GetAllPostsFollowingsResult>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
         private readonly IFollowerRepository _followerRepository;
 
-        public GetAllPostsFollowingByUsernameQueryHandler
+        public GetAllPostsFollowingsByUsernameQueryHandler
         (
             IUserRepository userRepository,
             IPostRepository postRepository,
@@ -24,7 +24,7 @@ namespace CloneInstagramAPI.Application.Posts.Queries
             _followerRepository = followerRepository;
         }
 
-        public async Task<ICollection<GetAllPostsFollowingResult>> Handle(GetAllPostsFollowingByUsernameQuery query, CancellationToken cancellationToken)
+        public async Task<ICollection<GetAllPostsFollowingsResult>> Handle(GetAllPostsFollowingsByUsernameQuery query, CancellationToken cancellationToken)
         {
             if(await _userRepository.GetByUsername(query.Username) is not User user)
             {
@@ -32,12 +32,12 @@ namespace CloneInstagramAPI.Application.Posts.Queries
             }
 
             var posts = await _postRepository.GetAll();
-            var following = await _followerRepository.GetAllFollowing(user.Id);
+            var following = await _followerRepository.GetAllFollowingsById(user.Id);
 
             var postsFollowing = posts.Where(p => following.Any(f => p.UserId == f.FollowingUserId) || p.UserId == user.Id);
 
             return postsFollowing
-                .Select(p => new GetAllPostsFollowingResult
+                .Select(p => new GetAllPostsFollowingsResult
                     (
                         p.Id, p.Content, p.Description,
                         p.User.Avatar, p.User.Username,

@@ -22,12 +22,12 @@ namespace CloneInstagramAPI.Application.Posts.Commands
         }
         public async Task<bool> Handle(UpdatePostDeleteCommentByIdCommand command, CancellationToken cancellationToken)
         {
-            if(await _userRepository.GetById() is not User user)
+            if(await _userRepository.Get() is not User user)
             {
                 throw new UserNotFoundException();
             }
 
-            if(await _commentRepository.Get(command.CommentId) is not Comment comment)
+            if(await _commentRepository.GetById(command.CommentId) is not Comment comment)
             {
                 throw new PostCommentNotFoundException();
             }

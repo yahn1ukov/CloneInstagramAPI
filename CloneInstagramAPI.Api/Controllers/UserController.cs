@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CloneInstagramAPI.Application.Users.Commands;
-using CloneInstagramAPI.Application.Users.Common;
 using CloneInstagramAPI.Application.Users.Queries;
+using CloneInstagramAPI.Contracts.Follower;
 using CloneInstagramAPI.Contracts.User;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -62,10 +62,10 @@ namespace CloneInstagramAPI.Api.Controllers
             );
         }
 
-        [HttpGet("{username}/following")]
-        public async Task<IActionResult> GetAllUserFollowingByUsername(string username)
+        [HttpGet("{username}/followings")]
+        public async Task<IActionResult> GetAllUserFollowingsByUsername(string username)
         {
-            var query = new GetAllUserFollowingByUsernameQuery(username);
+            var query = new GetAllUserFollowingsByUsernameQuery(username);
 
             var result = await _mediator.Send(query);
 

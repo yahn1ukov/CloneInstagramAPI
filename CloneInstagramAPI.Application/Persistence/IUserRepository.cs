@@ -7,7 +7,7 @@ namespace CloneInstagramAPI.Application.Persistence
         Task<bool> ExistsAdmin();
         Task<bool> ExistsByEmail(string email);
         Task<bool> ExistsByUsername(string username);
-        Task<User?> GetById();
+        Task<User?> Get();
         Task<User?> GetByUsername(string username);
     }
 }

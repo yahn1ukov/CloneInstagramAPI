@@ -123,14 +123,14 @@ namespace CloneInstagramAPI.Api.Controllers
         [HttpGet("users/{username}/following")]
         public async Task<IActionResult> GetAllPostsFollowingByUsername(string username)
         {
-            var query = new GetAllPostsFollowingByUsernameQuery(username);
+            var query = new GetAllPostsFollowingsByUsernameQuery(username);
 
             var result = await _mediator.Send(query);
 
             return Ok
             (
                 result
-                .Select(r => _mapper.Map<GetAllPostsFollowingResponse>(r))
+                .Select(r => _mapper.Map<GetAllPostsFollowingsResponse>(r))
                 .ToList()   
             );
         }

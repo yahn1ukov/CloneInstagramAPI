@@ -60,7 +60,7 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             await _context.SaveChangesAsync();
         }
 
-        public async Task<User?> GetById()
+        public async Task<User?> Get()
         {
             return await _context.Users.SingleOrDefaultAsync(u => u.Id == GetUserId());
         }
@@ -72,9 +72,7 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
 
         public async Task<User?> GetByUsername(string username)
         {
-            return await _context.Users
-                .Include(u => u.Followers)
-                .SingleOrDefaultAsync(u => u.Username.ToLower().Equals(username.ToLower()));
+            return await _context.Users.SingleOrDefaultAsync(u => u.Username.ToLower().Equals(username.ToLower()));
         }
 
         public async Task<ICollection<User>> GetAll()

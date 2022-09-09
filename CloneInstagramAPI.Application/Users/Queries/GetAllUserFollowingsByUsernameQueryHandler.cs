@@ -6,12 +6,12 @@ using MediatR;
 
 namespace CloneInstagramAPI.Application.Users.Queries
 {
-    public class GetAllUserFollowingByUsernameQueryHandler : IRequestHandler<GetAllUserFollowingByUsernameQuery, ICollection<GetAllFollowersResult>>
+    public class GetAllUserFollowingsByUsernameQueryHandler : IRequestHandler<GetAllUserFollowingsByUsernameQuery, ICollection<GetAllFollowersResult>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IFollowerRepository _followerRepository;
 
-        public GetAllUserFollowingByUsernameQueryHandler
+        public GetAllUserFollowingsByUsernameQueryHandler
         (
             IUserRepository userRepository,
             IFollowerRepository followerRepository
@@ -21,14 +21,14 @@ namespace CloneInstagramAPI.Application.Users.Queries
             _followerRepository = followerRepository;
         }
 
-        public async Task<ICollection<GetAllFollowersResult>> Handle(GetAllUserFollowingByUsernameQuery query, CancellationToken cancellationToken)
+        public async Task<ICollection<GetAllFollowersResult>> Handle(GetAllUserFollowingsByUsernameQuery query, CancellationToken cancellationToken)
         {
             if (await _userRepository.GetByUsername(query.Username) is not User user)
             {
                 throw new UserNotFoundException();
             }
 
-            var following = await _followerRepository.GetAllFollowing(user.Id);
+            var following = await _followerRepository.GetAllFollowingsById(user.Id);
 
             return following
                 .Select(f => new GetAllFollowersResult(f.Id, f.FollowingUser.Username, f.FollowingUser.FullName))

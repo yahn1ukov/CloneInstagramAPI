@@ -17,29 +17,29 @@ namespace CloneInstagramAPI.Infrastructure.Persistence
             _context = context;
         }
 
-        public async Task<ICollection<Comment>> GetAll(Guid postId)
-        {
-            return await _context.Comments
-                .Include(c => c.User)
-                .Where(c => c.PostId == postId)
-                .ToListAsync();
-        }
-
-        public async Task<Comment?> Get(Guid commentId)
-        {
-            return await _context.Comments.SingleOrDefaultAsync(c => c.Id == commentId);
-        }
-
-        public async Task<Comment?> Get(Guid userId, Guid postId)
-        {
-            return await _context.Comments.SingleOrDefaultAsync(c => c.UserId == userId && c.PostId == postId);
-        }
-
         public async Task Add(Comment comment)
         {
             _context.Comments.Add(comment);
 
             await _context.SaveChangesAsync();    
+        }
+
+        public async Task<Comment?> GetById(Guid commentId)
+        {
+            return await _context.Comments.SingleOrDefaultAsync(c => c.Id == commentId);
+        }
+
+        public async Task<Comment?> GetById(Guid userId, Guid postId)
+        {
+            return await _context.Comments.SingleOrDefaultAsync(c => c.UserId == userId && c.PostId == postId);
+        }
+
+        public async Task<ICollection<Comment>> GetAllById(Guid postId)
+        {
+            return await _context.Comments
+                .Include(c => c.User)
+                .Where(c => c.PostId == postId)
+                .ToListAsync();
         }
 
         public async Task Remove(Comment comment)
