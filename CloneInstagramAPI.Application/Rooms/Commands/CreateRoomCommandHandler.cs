@@ -38,11 +38,19 @@ namespace CloneInstagramAPI.Application.Rooms.Commands
                 throw new RoomAlreadyExistsException();
             }
 
-            var room = new Room
+            var roomHttpContext = new Room
             {
                 UserId = userHttpContext.Id,
                 PenPalUserId = user.Id
             };
+
+            var room = new Room
+            {
+                UserId = user.Id,
+                PenPalUserId = userHttpContext.Id
+            };
+
+            await _roomRepository.Create(roomHttpContext);
 
             await _roomRepository.Create(room);
 
