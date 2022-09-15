@@ -5,4 +5,3 @@
 
 :one: [Technologies](/about/TECHNOLOGIES.md)<br/>
 :two: [Entities](/about/ENTITIES.md)<br/>
-:three: [Endpoints](/about/ENDPOINTS.md)
